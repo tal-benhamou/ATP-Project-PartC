@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+    <top>
+        <MenuBar stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#menuNewPressed" text="New" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#menuLoadPressed" text="Load" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
+                        <RadioMenuItem mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
+                        <RadioMenuItem  mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ExitApp" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+   <center>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#StartGame" prefHeight="40.0" prefWidth="100.0" text="Start" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Exit" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
