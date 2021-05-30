@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewController">
+<?import View.mazeDisplayer?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" stylesheets="@style.css" minWidth="-Infinity" prefHeight="561.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewController">
     <top>
         <MenuBar stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
             <menus>
@@ -42,6 +43,9 @@
     </top>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+          <center>
+              <mazeDisplayer fx:id="mazeDisplayer" imageFileNameWall="./resources/images/עץ.png" imageFileNamePlayer="./resources/images/hash2.png">  </mazeDisplayer>
+          </center>
          <bottom>
             <VBox alignment="CENTER" prefHeight="180.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>

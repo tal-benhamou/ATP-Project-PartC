@@ -4,15 +4,22 @@ import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ResourceBundle;
 
-public class MyViewController extends AView implements IView {
+public class MyViewController extends AView implements Observer, Initializable {
     public Button startButton;
 
 
@@ -47,5 +54,23 @@ public class MyViewController extends AView implements IView {
     @Override
     public void setViewModel(MyViewModel viewModel) {
 
+    }
+
+    public void fileNewPressed(ActionEvent actionEvent) {
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//        Melody = new AudioClip(Paths.get("C:\\Users\\Ido\\IdeaProjects\\ATP-Project-PartC\\resources\\sounds\\palletsound.mp3").toUri().toString());
+//        Melody.setCycleCount(200);
+//        Melody.setVolume(0.2);
+//        if(!muteMusic)
+//            Melody.play();
     }
 }
