@@ -53,16 +53,19 @@ public class MyViewController extends AView implements Observer, Initializable {
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
-
+        this.viewModel = viewModel;
+        this.viewModel.addObserver(this);
+        this.CurrScene = startButton.getScene();
     }
 
     public void fileNewPressed(ActionEvent actionEvent) {
-
+        Scene scene = startButton.getScene();
+        openNewScene(scene);
+        viewModel.generateMaze(15, 15);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
     }
 
     @Override

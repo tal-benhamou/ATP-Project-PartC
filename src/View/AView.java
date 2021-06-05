@@ -2,11 +2,13 @@ package View;
 
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 
 public abstract class AView implements IView{
 
     protected MyViewModel viewModel;
+    protected Scene CurrScene;
     static protected AudioClip Melody;
     static boolean muteMusic = false;
     static boolean muteSound = false;

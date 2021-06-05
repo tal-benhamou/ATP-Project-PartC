@@ -68,12 +68,12 @@
                            </GridPane.margin>
                         </Label>
                         <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="231.0" text="Columns" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <TextField maxWidth="100.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
-                        <TextField maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textField_mazeRows" maxWidth="100.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="textField_mazeCols" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button maxWidth="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="91.0" text="Generate" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="66.0" text="Solve" />
+                  <Button maxWidth="91.0" mnemonicParsing="false" onAction="#GenerateMaze" prefHeight="32.0" prefWidth="91.0" text="Generate" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#SolveMaze" prefHeight="34.0" prefWidth="66.0" text="Solve" />
                </children>
             </VBox>
          </bottom>

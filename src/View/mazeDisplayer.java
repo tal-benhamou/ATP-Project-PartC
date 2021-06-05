@@ -1,5 +1,7 @@
 package View;
 
+import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
@@ -11,7 +13,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class mazeDisplayer extends Canvas {
-    private int[][] maze;
+    private Maze maze;
+    private Solution sol;
     // player position:
     private int playerRow = 0;
     private int playerCol = 0;
@@ -58,7 +61,7 @@ public class mazeDisplayer extends Canvas {
         this.imageFileNamePlayer.set(imageFileNamePlayer);
     }
 
-    public void drawMaze(int[][] maze) {
+    public void drawMaze(Maze maze) {
         this.maze = maze;
         draw();
     }
@@ -67,8 +70,8 @@ public class mazeDisplayer extends Canvas {
         if(maze != null){
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
-            int rows = maze.length;
-            int cols = maze[0].length;
+            int rows = maze.getMap().length;
+            int cols = maze.getMap()[0].length;
 
             double cellHeight = canvasHeight / rows;
             double cellWidth = canvasWidth / cols;
@@ -78,8 +81,18 @@ public class mazeDisplayer extends Canvas {
             graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
             drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
+            if (sol != null)
+                drawSol(graphicsContext, cellHeight, cellWidth);
             drawPlayer(graphicsContext, cellHeight, cellWidth);
         }
+    }
+
+    public void setSol(Solution sol) {
+        this.sol = sol;
+    }
+
+    private void drawSol(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
+
     }
 
     private void drawMazeWalls(GraphicsContext graphicsContext, double cellHeight, double cellWidth, int rows, int cols) {
@@ -94,7 +107,7 @@ public class mazeDisplayer extends Canvas {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if(maze[i][j] == 1){
+                if(maze.getMap()[i][j] == 1){
                     //if it is a wall:
                     double x = j * cellWidth;
                     double y = i * cellHeight;
