@@ -21,6 +21,8 @@ public class mazeDisplayer extends Canvas {
     // wall and player images:
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    StringProperty imageEndPikaco = new SimpleStringProperty();
+    StringProperty imageStepSolve = new SimpleStringProperty();
 
 
     public int getPlayerRow() {
@@ -57,13 +59,38 @@ public class mazeDisplayer extends Canvas {
         return imageFileNamePlayer.get();
     }
 
-    public void setImageFileNamePlayer(String imageFileNamePlayer) {
-        this.imageFileNamePlayer.set(imageFileNamePlayer);
+    public void setImageFileNamePlayer(String imageFileNamePlayer) { this.imageFileNamePlayer.set(imageFileNamePlayer);}
+
+    public String getImageEndPikaco() {
+        return imageEndPikaco.get();
     }
+
+    public String imageEndPikacoProperty() {
+        return imageEndPikaco.get();
+    }
+
+    public void setImageEndPikaco(String imageFileNameWall) {
+        this.imageEndPikaco.set(imageFileNameWall);
+    }
+
+    public String getImageStepSolve() {
+        return imageStepSolve.get();
+    }
+
+    public String imageStepSolveProperty() {
+        return imageStepSolve.get();
+    }
+
+    public void setImageStepSolve(String imageFileNameWall) {
+        this.imageStepSolve.set(imageFileNameWall);
+    }
+
 
     public void drawMaze(Maze maze) {
         this.maze = maze;
         draw();
+        GraphicsContext graphicsContext = getGraphicsContext2D();
+        drawPlayer(graphicsContext, playerRow, playerCol);
     }
 
     private void draw() {

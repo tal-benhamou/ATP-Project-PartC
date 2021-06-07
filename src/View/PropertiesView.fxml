@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesViewController">
-    <center>
-        <VBox alignment="BOTTOM_CENTER" maxHeight="200.0" prefHeight="25.0" prefWidth="75.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="955.0" style="-fx-background-image: url('images/NiceCover.jpg');" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesViewController">
+   <top>
+        <AnchorPane prefHeight="387.0" prefWidth="785.0" BorderPane.alignment="CENTER">
             <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#PicaAction" prefHeight="25.0" prefWidth="75.0" text="Pica Pica!" />
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="306.0" layoutY="349.0" mnemonicParsing="false" onAction="#GoToGameView" prefHeight="30.0" prefWidth="152.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Confirm &amp; Let`s Go!">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <SplitMenuButton blendMode="SRC_ATOP" cacheHint="QUALITY" layoutX="285.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Best First Search">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Best First Search" />
+                <MenuItem mnemonicParsing="false" text="Depth First Search" />
+                  <MenuItem mnemonicParsing="false" text="Breadth First Search" />
+              </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </SplitMenuButton>
+            <Label layoutX="65.0" layoutY="240.0" prefHeight="25.0" prefWidth="207.0" text="Choose Algorithm To Solve:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
+            <Label layoutX="65.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" text="Choose Algorithm To Generate:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
+            <SplitMenuButton accessibleRole="BUTTON" blendMode="SRC_ATOP" ellipsisString="" layoutX="315.0" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="201.0" text="My Maze Generate">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Empty Maze Generator" />
+                <MenuItem mnemonicParsing="false" text="My Maze Generator" />
+                  <MenuItem mnemonicParsing="false" text="Simple Maze Generator" />
+              </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </SplitMenuButton>
+            <TextField blendMode="SRC_ATOP" layoutX="335.0" layoutY="78.0" prefHeight="25.0" prefWidth="59.0" text="10" />
+            <Label layoutX="65.0" layoutY="75.0" prefHeight="32.0" prefWidth="261.0" text="How Many Threads Do You Want?" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
             </children>
-        </VBox>
-    </center>
+        </AnchorPane>
+   </top>
 </BorderPane>

@@ -10,8 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import javax.sound.midi.ControllerEventListener;
+import javax.sound.midi.ShortMessage;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -61,7 +65,7 @@ public class MyViewController extends AView implements Observer, Initializable {
     public void fileNewPressed(ActionEvent actionEvent) {
         Scene scene = startButton.getScene();
         openNewScene(scene);
-        viewModel.generateMaze(15, 15);
+        viewModel.generateMaze(10, 10);
     }
 
     @Override
@@ -70,10 +74,15 @@ public class MyViewController extends AView implements Observer, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        Melody = new AudioClip(Paths.get("C:\\Users\\Ido\\IdeaProjects\\ATP-Project-PartC\\resources\\sounds\\palletsound.mp3").toUri().toString());
-//        Melody.setCycleCount(200);
-//        Melody.setVolume(0.2);
-//        if(!muteMusic)
-//            Melody.play();
+        String s = "resources/sounds/palletsound.mp3";
+        Media media = new Media(Paths.get(s).toUri().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(200);
+        mediaPlayer.setVolume(0.2);
+        mediaPlayer.setAutoPlay(true);
+    }
+
+    public void ExitApp(ActionEvent actionEvent) {
+        super.ExitApp(actionEvent);
     }
 }

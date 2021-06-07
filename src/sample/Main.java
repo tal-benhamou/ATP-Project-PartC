@@ -17,7 +17,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("The Pokemon Game");
         primaryStage.getIcons().add(new Image("./images/picachu.png"));
-        primaryStage.setScene(new Scene(root, 600, 700));
+        primaryStage.setScene(new Scene(root, 955, 900));
         primaryStage.show();
     }
 
