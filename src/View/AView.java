@@ -5,25 +5,44 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public abstract class AView implements IView{
 
     protected MyViewModel viewModel;
     protected Scene CurrScene;
+    public static MediaPlayer picaSound;
     public static MediaPlayer mediaPlayer;
     static boolean musicPlay = true;
+    public Button picaButton;
 
 
 
     public void PicaAction(ActionEvent actionEvent) {
-
+        if (picaSound == null){
+            String s = "resources/sounds/pikachuSounds_Trim.mp4";
+            Media media = new Media(Paths.get(s).toUri().toString());
+            picaSound = new MediaPlayer(media);
+            picaSound.setVolume(0.3);
+            picaSound.setAutoPlay(true);
+            while(picaSound.isAutoPlay()){}
+        }
+        else{
+            picaSound.setAutoPlay(true);
+            while(picaSound.isAutoPlay()){}
+        }
+        Stage stage = (Stage)picaButton.getScene().getWindow();
+        stage.close();
     }
+
     public void menuNewPressed(ActionEvent actionEvent) {
 
     }
@@ -93,7 +112,6 @@ public abstract class AView implements IView{
         newWindow.setScene(s);
         newWindow.show();
         return newWindow;
-
     }
 
 }
