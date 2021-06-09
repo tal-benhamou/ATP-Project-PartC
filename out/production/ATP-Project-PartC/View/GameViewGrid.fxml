@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<BorderPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#mouseCLicked" prefHeight="550.0" prefWidth="691.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
+    <top>
+        <MenuBar fx:id="menuBar" prefHeight="19.0" prefWidth="691.0" stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
+                        <MenuItem fx:id="saveMazeButton" disable="true" mnemonicParsing="false" onAction="#menuSavePressed" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="Load" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
+                        <RadioMenuItem fx:id="muteSound_rb" mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
+                        <RadioMenuItem fx:id="muteMusic_rb" mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ExitApp" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+    </center>
+    <center>
+        <BorderPane fx:id="borderPane" onMouseClicked="#mouseCLicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="691.0" spacing="10.0" BorderPane.alignment="CENTER">
+                    <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" minWidth="50.0" prefHeight="545.0" prefWidth="691.0" stylesheets="@MainStyle.css" />
+                    <VBox fx:id="vbox" alignment="CENTER" prefHeight="92.0" prefWidth="691.0" spacing="15.0">
+                        <children>
+                            <HBox fx:id="hbox" alignment="CENTER" prefHeight="50.0" prefWidth="691.0" spacing="10.0">
+                                <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                        <children>
+                                            <Label text="Rows" textFill="BLACK" />
+                                            <TextField fx:id="rowsTextField" text="10" />
+                                        </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                        <children>
+                                            <Label text="Columns" textFill="BLACK" />
+                                            <TextField fx:id="colsTextField" text="10" />
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                            <Button fx:id="generateMazeButton" mnemonicParsing="false" onAction="#generateMaze" prefWidth="100.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Generate" />
+                            <Button fx:id="solveMazeButton" disable="true" mnemonicParsing="false" onMousePressed="#SolveMaze" onMouseReleased="#undrawSolution" stylesheets="@MainStyle.css" text="Solve" />
+                        </children>
+                        <padding>
+                            <Insets bottom="20.0" />
+                        </padding>
+                    </VBox>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+    <bottom>
+        <MediaView fx:id="finishSongPlayer" visible="false" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>
