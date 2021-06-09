@@ -3,9 +3,11 @@ package View;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -15,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public abstract class AView implements IView{
+public abstract class AView implements Runnable,IView{
 
     protected MyViewModel viewModel;
     protected Scene CurrScene;
@@ -23,23 +25,30 @@ public abstract class AView implements IView{
     public static MediaPlayer mediaPlayer;
     static boolean musicPlay = true;
     public Button picaButton;
+    static boolean soundPlay = true;
 
 
+    public void PicaAction(ActionEvent actionEvent) throws InterruptedException {
 
-    public void PicaAction(ActionEvent actionEvent) {
-        if (picaSound == null){
-            String s = "resources/sounds/pikachuSounds_Trim.mp4";
-            Media media = new Media(Paths.get(s).toUri().toString());
-            picaSound = new MediaPlayer(media);
-            picaSound.setVolume(0.3);
-            picaSound.setAutoPlay(true);
-            while(picaSound.isAutoPlay()){}
-        }
-        else{
-            picaSound.setAutoPlay(true);
-            while(picaSound.isAutoPlay()){}
-        }
-        Stage stage = (Stage)picaButton.getScene().getWindow();
+        String s = "resources/sounds/pikachuSounds_Trim.mp3";
+        Media media = new Media(Paths.get(s).toUri().toString());
+        picaSound = new MediaPlayer(media);
+        picaSound.setVolume(0.8);
+        if (musicPlay)
+            mediaPlayer.pause();
+        if (soundPlay)
+            picaSound.play();
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                if (musicPlay)
+                    mediaPlayer.play();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Node n = (Node)actionEvent.getSource();
+        Stage stage = (Stage)n.getScene().getWindow();
         stage.close();
     }
 
@@ -52,18 +61,24 @@ public abstract class AView implements IView{
     }
 
     public void muteSound(ActionEvent actionEvent) {
+        if (soundPlay){
+            picaSound.stop();
+            soundPlay = false;
+        }
+        else{
+            soundPlay = true;
+        }
+
     }
 
     public void muteMusic(ActionEvent actionEvent) {
-        boolean curr = true;
         if (musicPlay){
-            mediaPlayer.pause();
-            curr = false;
+            mediaPlayer.stop();
+            musicPlay = false;
         }
         else{
-            mediaPlayer.play();
+            musicPlay = true;
         }
-        musicPlay = curr;
     }
 
     public void ExitApp(ActionEvent actionEvent) {

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 
+=======
+<?import View.*?>
+>>>>>>> 7184f1b150e6347518fb886fa05ee89fd981fdc3
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -42,10 +46,16 @@
         </MenuBar>
     </top>
     <center>
+<<<<<<< HEAD
     </center>
     <center>
         <BorderPane fx:id="borderPane" onMouseClicked="#mouseCLicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <center>
+=======
+        <BorderPane fx:id="borderPane" onMouseClicked="#mouseCLicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <mazeDisplayer fx:id="mazeDisplayer2" height="400.0" imageFileNamePlayer="./resources/images/mario.jpg" imageFileNameWall="./resources/images/wall.jpg" onKeyPressed="#keyPressed" width="400.0" />
+>>>>>>> 7184f1b150e6347518fb886fa05ee89fd981fdc3
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="691.0" spacing="10.0" BorderPane.alignment="CENTER">
                     <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" minWidth="50.0" prefHeight="545.0" prefWidth="691.0" stylesheets="@MainStyle.css" />
                     <VBox fx:id="vbox" alignment="CENTER" prefHeight="92.0" prefWidth="691.0" spacing="15.0">

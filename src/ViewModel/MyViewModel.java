@@ -1,6 +1,6 @@
 package ViewModel;
 
-import Model.IModel;
+import Model.*;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyEvent;
