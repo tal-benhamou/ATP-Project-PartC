@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.*;
 import java.util.Properties;
 
 public class MyModel extends Observable implements IModel {

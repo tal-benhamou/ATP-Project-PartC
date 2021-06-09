@@ -3,13 +3,17 @@ package View;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.URL;
@@ -21,10 +25,12 @@ public class GameViewGridController extends AView implements Observer, Initializ
     public TextField textField_mazeRows;
     public TextField textField_mazeCols;
     public mazeDisplayer _mazeDisplayer;
+    public ScrollPane scPane;
 
     @Override
     public void setViewModel(MyViewModel viewModel) {
-
+        this.viewModel = viewModel;
+        this.viewModel.addObserver(this);
     }
 
     @Override
@@ -72,6 +78,10 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     public void GenerateMaze(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.show();
+        scPane.setContent(node);
         int rows = Integer.parseInt(textField_mazeRows.getText());
         int cols = Integer.parseInt(textField_mazeCols.getText());
         if (rows < 2 || cols < 2){
@@ -113,6 +123,15 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     public void zoomIn(ScrollEvent scrollEvent) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    public void keyPressed(KeyEvent keyEvent) {
 
     }
 }

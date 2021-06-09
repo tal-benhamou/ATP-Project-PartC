@@ -17,4 +17,8 @@ public class AboutViewController extends AView implements IView {
     public void setViewModel(MyViewModel viewModel) { }
 
 
+    @Override
+    public void run() {
+
+    }
 }

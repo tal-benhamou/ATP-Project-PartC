@@ -1,6 +1,6 @@
 package View;
 
-import ViewModel.MyViewModel;
+import ViewModel.*;
 import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -78,11 +80,17 @@ public class MyViewController extends AView implements Observer, Initializable {
         Media media = new Media(Paths.get(s).toUri().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(200);
-        mediaPlayer.setVolume(0.2);
+        mediaPlayer.setVolume(0.1);
         mediaPlayer.setAutoPlay(true);
     }
 
-    public void ExitApp(ActionEvent actionEvent) {
+    public void ExitAppMyView(ActionEvent actionEvent) {
+        CurrScene = startButton.getScene();
         super.ExitApp(actionEvent);
+    }
+
+    @Override
+    public void run() {
+
     }
 }
