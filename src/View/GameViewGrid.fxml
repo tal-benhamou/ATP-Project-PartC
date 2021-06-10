@@ -1,82 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import View.*?>
-<?import javafx.geometry.*?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.media.*?>
 
-<BorderPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#mouseCLicked" prefHeight="550.0" prefWidth="691.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
-    <top>
-        <MenuBar fx:id="menuBar" prefHeight="19.0" prefWidth="691.0" stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
-                        <MenuItem fx:id="saveMazeButton" disable="true" mnemonicParsing="false" onAction="#menuSavePressed" text="Save" />
-                        <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="Load" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Options">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
-                        <RadioMenuItem fx:id="muteSound_rb" mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
-                        <RadioMenuItem fx:id="muteMusic_rb" mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Exit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#ExitApp" text="Exit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="About">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
-    <center>
-        <BorderPane fx:id="borderPane" onMouseClicked="#mouseCLicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <center>
-                <mazeDisplayer fx:id="mazeDisplayer2" height="400.0" imageFileNamePlayer="./resources/images/mario.jpg" imageFileNameWall="./resources/images/wall.jpg" onKeyPressed="#keyPressed" width="400.0" />
-                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="691.0" spacing="10.0" BorderPane.alignment="CENTER">
-                    <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" minWidth="50.0" prefHeight="545.0" prefWidth="691.0" stylesheets="@MainStyle.css" />
-                    <VBox fx:id="vbox" alignment="CENTER" prefHeight="92.0" prefWidth="691.0" spacing="15.0">
-                        <children>
-                            <HBox fx:id="hbox" alignment="CENTER" prefHeight="50.0" prefWidth="691.0" spacing="10.0">
-                                <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                        <children>
-                                            <Label text="Rows" textFill="BLACK" />
-                                            <TextField fx:id="rowsTextField" text="10" />
-                                        </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                        <children>
-                                            <Label text="Columns" textFill="BLACK" />
-                                            <TextField fx:id="colsTextField" text="10" />
-                                        </children>
-                                    </VBox>
-                                </children>
-                            </HBox>
-                            <Button fx:id="generateMazeButton" mnemonicParsing="false" onAction="#generateMaze" prefWidth="100.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Generate" />
-                            <Button fx:id="solveMazeButton" disable="true" mnemonicParsing="false" onMousePressed="#SolveMaze" onMouseReleased="#undrawSolution" stylesheets="@MainStyle.css" text="Solve" />
-                        </children>
-                        <padding>
-                            <Insets bottom="20.0" />
-                        </padding>
-                    </VBox>
-                </VBox>
-            </center>
-        </BorderPane>
-    </center>
-    <bottom>
-        <MediaView fx:id="finishSongPlayer" visible="false" BorderPane.alignment="CENTER" />
-    </bottom>
-</BorderPane>
+<?import View.MazeDisplayer?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" prefHeight="558.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
+   <children>
+      <GridPane prefHeight="558.0" prefWidth="758.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="180.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="459.0" minHeight="10.0" prefHeight="402.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+             <MenuBar stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
+                 <Menu mnemonicParsing="false" text="File">
+                     <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
+                     <MenuItem disable="true" mnemonicParsing="false" text="Save" />
+                     <MenuItem mnemonicParsing="false" onAction="#menuLoadPressed" text="Load" />
+                 </Menu>
+                 <Menu mnemonicParsing="false" text="Options">
+                     <items>
+                         <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
+                         <RadioMenuItem mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
+                         <RadioMenuItem mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
+                     </items>
+                 </Menu>
+                 <Menu mnemonicParsing="false" text="Exit">
+                     <items>
+                         <MenuItem mnemonicParsing="false" onAction="#ExitAppMyView" text="Exit" />
+                     </items>
+                 </Menu>
+                 <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                         <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
+                     </items>
+                 </Menu>
+                 <Menu mnemonicParsing="false" text="About">
+                     <items>
+                         <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
+                     </items>
+                 </Menu>
+             </MenuBar>
+            <AnchorPane  prefHeight="114.0" prefWidth="758.0" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="generateMazeButton" onAction="#generateNewMaze" layoutX="308.0" layoutY="59.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" stylesheets="@MainStyle.css" text="Generate" />
+                  <Button fx:id="solveMazeButton" onAction="#solveMaze"  layoutX="357.0" layoutY="91.0" mnemonicParsing="false" stylesheets="@MainStyle.css" text="Solve" />
+                  <Label layoutX="263.0" layoutY="20.0" prefHeight="31.0" prefWidth="32.0" text="Rows:" />
+                  <Label layoutX="353.0" layoutY="23.0" prefHeight="25.0" prefWidth="52.0" text="Columns:" />
+                  <TextField fx:id="rowsTextField" layoutX="295.0" layoutY="23.0" prefHeight="18.0" prefWidth="52.0" />
+                  <TextField fx:id="colsTextField" layoutX="404.0" layoutY="23.0" prefHeight="25.0" prefWidth="52.0" />
+               </children>
+            </AnchorPane>
+            <GridPane fx:id="gridPane" GridPane.rowIndex="1" >
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+                <children>
+                    <MazeDisplayer fx:id="mazeDisplayer" height="550.0" imagePlayer="./resources/images/hash2.png" imageWall="./resources/images/tree.png" imageEnd="./resources/images/picachu.png" imageSolve="resources/images/SomeofPokemon2.png" onKeyPressed="#keyPressed" onMouseClicked="#mouseCLicked" onScroll="#zoomIn" style="-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="600.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -1,7 +1,6 @@
 package View;
 
 import ViewModel.*;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,15 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import javax.sound.midi.ControllerEventListener;
-import javax.sound.midi.ShortMessage;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -34,12 +28,12 @@ public class MyViewController extends AView implements Observer, Initializable {
         openNewScene(GameScene);
     }
 
-    protected IView openNewScene(Scene scene) {
+    protected void openNewScene(Scene scene) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
-            Parent tableViewParent = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameViewGrid.fxml"));
+            Parent tableViewParent = fxmlLoader.load();
 
-            tableViewParent = fxmlLoader.load();
+//            tableViewParent = fxmlLoader.load();
 
             Stage window = (Stage) scene.getWindow();
             Scene curScene = startButton.getScene();
@@ -49,12 +43,10 @@ public class MyViewController extends AView implements Observer, Initializable {
             IView view = fxmlLoader.getController();
             view.setViewModel(viewModel);
             window.show();
-            return view;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override
@@ -80,7 +72,7 @@ public class MyViewController extends AView implements Observer, Initializable {
         Media media = new Media(Paths.get(s).toUri().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(200);
-        mediaPlayer.setVolume(0.1);
+        mediaPlayer.setVolume(0.05);
         mediaPlayer.setAutoPlay(true);
     }
 
@@ -89,8 +81,4 @@ public class MyViewController extends AView implements Observer, Initializable {
         super.ExitApp(actionEvent);
     }
 
-    @Override
-    public void run() {
-
-    }
 }

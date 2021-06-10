@@ -1,7 +1,10 @@
 package View;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
 import algorithms.search.Solution;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
@@ -11,158 +14,125 @@ import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 
-public class mazeDisplayer extends Canvas {
+public class MazeDisplayer extends Canvas {
     private Maze maze;
+    private double cellHeight;
+    private  double cellWidth;
+    public StringProperty imagePlayer = new SimpleStringProperty();
+    public StringProperty imageEnd = new SimpleStringProperty();
+    public StringProperty imageSolve = new SimpleStringProperty();
+    public StringProperty imageWall = new SimpleStringProperty();
+    private int playerRow;
+    private int playerCol;
     private Solution sol;
-    // player position:
-    private int playerRow = 0;
-    private int playerCol = 0;
-    // wall and player images:
-    StringProperty imageFileNameWall = new SimpleStringProperty();
-    StringProperty imageFileNamePlayer = new SimpleStringProperty();
-    StringProperty imageEndPikaco = new SimpleStringProperty();
-    StringProperty imageStepSolve = new SimpleStringProperty();
 
 
-    public int getPlayerRow() {
-        return playerRow;
+    public String getImagePlayer(){return imagePlayer.get();}
+    public String getImageEnd(){return imageEnd.get();}
+    public String getImageSolve(){return imageSolve.get();}
+    public String getImageWall(){return imageWall.get();}
+
+    public void setImagePlayer(String imagePlayer) {this.imagePlayer.set(imagePlayer);}
+
+    public void setImageEnd(String imageEnd) {this.imageEnd.set(imageEnd);}
+
+    public void setImageSolve(String imageSolve) {this.imageSolve.set(imageSolve);}
+
+    public void setImageWall(String imageWall) {this.imageWall.set(imageWall);}
+
+    public void drawMaze(Maze maze) throws FileNotFoundException {
+        this.maze = maze;
+        this.sol = null;
+        this.playerRow = maze.getStartPosition().getRowIndex();
+        this.playerCol = maze.getStartPosition().getColumnIndex();
+        draw();
+        //drawPlayer(maze.getGoalPosition().getRowIndex(), maze.getGoalPosition().getColumnIndex(), getGraphicsContext2D());
     }
 
-    public int getPlayerCol() {
-        return playerCol;
-    }
+    private void drawPlayer(int rowIndex, int columnIndex, GraphicsContext graph) throws FileNotFoundException {
+        Image player = new Image(new FileInputStream(getImagePlayer()));
+//        graph.setGlobalAlpha(0.1);
+//        graph.setFill(Color.WHITE);
+//        graph.fillRect((cellWidth*playerCol)+0.15, (cellHeight*playerRow)+0.15, cellWidth-0.2, cellHeight-0.18);
+//        graph.setGlobalAlpha(1);
+        graph.drawImage(player, playerCol*cellWidth, playerRow*cellHeight, cellWidth, cellHeight);
 
-    public void setPlayerPosition(int row, int col) {
+
+    }
+    public void setPlayerPosition(int row, int col) throws FileNotFoundException {
+        drawOld(getGraphicsContext2D());
         this.playerRow = row;
         this.playerCol = col;
-        draw();
+        drawOld(getGraphicsContext2D());
+        drawPlayer(row, col, getGraphicsContext2D());
+    }
+    private void drawOld(GraphicsContext graph) {
+        double x = playerCol * cellWidth;
+        double y = playerRow * cellHeight;
+        graph.setFill(Color.WHITE);
+        graph.fillRect(x, y, cellWidth, cellHeight);
     }
 
-    public String getImageFileNameWall() {
-        return imageFileNameWall.get();
-    }
+    public void draw() throws FileNotFoundException {
+        double hightCanvas = getHeight();
+        double widthCanvas = getHeight();
+        int row = maze.getMap().length;
+        int column = maze.getMap()[0].length;
+        cellHeight = hightCanvas/row;
+        cellWidth = widthCanvas/column;
+        GraphicsContext graph = getGraphicsContext2D();
+        graph.clearRect(0, 0, widthCanvas, hightCanvas);
 
-    public String imageFileNameWallProperty() {
-        return imageFileNameWall.get();
-    }
-
-    public void setImageFileNameWall(String imageFileNameWall) {
-        this.imageFileNameWall.set(imageFileNameWall);
-    }
-
-    public String getImageFileNamePlayer() {
-        return imageFileNamePlayer.get();
-    }
-
-    public String imageFileNamePlayerProperty() {
-        return imageFileNamePlayer.get();
-    }
-
-    public void setImageFileNamePlayer(String imageFileNamePlayer) { this.imageFileNamePlayer.set(imageFileNamePlayer);}
-
-    public String getImageEndPikaco() {
-        return imageEndPikaco.get();
-    }
-
-    public String imageEndPikacoProperty() {
-        return imageEndPikaco.get();
-    }
-
-    public void setImageEndPikaco(String imageFileNameWall) {
-        this.imageEndPikaco.set(imageFileNameWall);
-    }
-
-    public String getImageStepSolve() {
-        return imageStepSolve.get();
-    }
-
-    public String imageStepSolveProperty() {
-        return imageStepSolve.get();
-    }
-
-    public void setImageStepSolve(String imageFileNameWall) {
-        this.imageStepSolve.set(imageFileNameWall);
-    }
-
-
-    public void drawMaze(Maze maze) {
-        this.maze = maze;
-        draw();
-        GraphicsContext graphicsContext = getGraphicsContext2D();
-        drawPlayer(graphicsContext, playerRow, playerCol);
-    }
-
-    private void draw() {
-        if(maze != null){
-            double canvasHeight = getHeight();
-            double canvasWidth = getWidth();
-            int rows = maze.getMap().length;
-            int cols = maze.getMap()[0].length;
-
-            double cellHeight = canvasHeight / rows;
-            double cellWidth = canvasWidth / cols;
-
-            GraphicsContext graphicsContext = getGraphicsContext2D();
-            //clear the canvas:
-            graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
-
-            drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
-            if (sol != null)
-                drawSol(graphicsContext, cellHeight, cellWidth);
-            drawPlayer(graphicsContext, cellHeight, cellWidth);
-        }
-    }
-
-    public void setSol(Solution sol) {
-        this.sol = sol;
-    }
-
-    private void drawSol(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
-
-    }
-
-    private void drawMazeWalls(GraphicsContext graphicsContext, double cellHeight, double cellWidth, int rows, int cols) {
-        graphicsContext.setFill(Color.RED);
-
-        Image wallImage = null;
-        try{
-            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no wall image file");
-        }
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if(maze.getMap()[i][j] == 1){
-                    //if it is a wall:
-                    double x = j * cellWidth;
-                    double y = i * cellHeight;
-                    if(wallImage == null)
-                        graphicsContext.fillRect(x, y, cellWidth, cellHeight);
-                    else
-                        graphicsContext.drawImage(wallImage, x, y, cellWidth, cellHeight);
+//        graph.setGlobalAlpha(0.1);
+//        graph.setFill(Color.WHITE);
+//        graph.fillRect(0, 0, widthCanvas, hightCanvas);
+//        graph.setGlobalAlpha(1);
+        double height, width;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                width = j*cellWidth;
+                height = i*cellHeight;
+                if (maze.getMap()[i][j] == 1){
+                    Image wall = new Image(new FileInputStream(getImageWall()));
+                    graph.drawImage(wall, width, height, cellWidth, cellHeight);
+                    //graph.fillRect(width, height, cellHeight, cellHeight);
+                }
+                else {
+                    graph.setFill(Color.LIGHTGOLDENRODYELLOW);
+                    graph.fillRect(width, height, cellWidth, cellHeight);
                 }
             }
+
+
         }
+        double heightGoalCell = maze.getGoalPosition().getRowIndex();
+        double widthGoalCell = maze.getGoalPosition().getColumnIndex();
+        Image Goal = new Image(new FileInputStream(getImageEnd()));
+        graph.drawImage(Goal, widthGoalCell*cellWidth, heightGoalCell*cellHeight, cellWidth,cellHeight);
+        if (sol != null){
+            drawSol(sol);
+        }
+        drawPlayer(row, column, graph);
     }
 
-    private void drawPlayer(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
-        double x = getPlayerCol() * cellWidth;
-        double y = getPlayerRow() * cellHeight;
-        graphicsContext.setFill(Color.GREEN);
+    public void movePlayer(int row, int col) throws FileNotFoundException {
+        if (maze != null)
+            drawPlayer(row, col, getGraphicsContext2D());
+    }
 
-        Image playerImage = null;
-        try {
-            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no player image file");
+    public void drawSol(Solution sol) throws FileNotFoundException {
+        List<AState> lst = sol.getSolutionPath();
+        int counter = 0;
+        for (AState a:lst) {
+            if (counter == 0 && lst.size()-1 != counter){
+                Image solve = new Image(new FileInputStream(getImageSolve()));
+                GraphicsContext graph = getGraphicsContext2D();
+                graph.drawImage(solve,  ((MazeState)a).getPosition().getColumnIndex()*cellWidth, ((MazeState)a).getPosition().getRowIndex()*cellHeight, cellWidth, cellHeight);
+            }
+            counter++;
         }
-        if(playerImage == null)
-            graphicsContext.fillRect(x, y, cellWidth, cellHeight);
-        else
-            graphicsContext.drawImage(playerImage, x, y, cellWidth, cellHeight);
     }
 
 }
-

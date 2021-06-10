@@ -10,21 +10,25 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class MyViewModel extends Observable implements Observer {
-    private IModel model;
+    private final IModel model;
 
     public MyViewModel(IModel model) {
         this.model = model;
         this.model.assignObserver(this);
     }
+
     public void generateMaze(int row, int col){
         model.generateMaze(row, col);
     }
+
     public void solveMaze(){
         model.solveMaze();
     }
+
     public Maze getMaze(){
         return model.getMaze();
     }
+
     public Solution getSolution(){
         return model.getSolution();
     }
@@ -34,6 +38,7 @@ public class MyViewModel extends Observable implements Observer {
     public int getPlayerCol(){
         return model.getPlayerCol();
     }
+
     public void movePlayer(KeyEvent keyEvent){
         int direction = -1;
         switch (keyEvent.getCode()){

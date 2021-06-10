@@ -71,8 +71,4 @@ public class PropertiesViewController extends AView implements IView {
         SolveAlg.setText("Depth First Search");
     }
 
-    @Override
-    public void run() {
-
-    }
 }

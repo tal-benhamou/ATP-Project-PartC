@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public abstract class AView implements Runnable,IView{
+public abstract class AView implements IView{
 
     protected MyViewModel viewModel;
     protected Scene CurrScene;
@@ -78,6 +78,7 @@ public abstract class AView implements Runnable,IView{
         }
         else{
             musicPlay = true;
+            mediaPlayer.play();
         }
     }
 

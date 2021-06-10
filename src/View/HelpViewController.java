@@ -9,9 +9,4 @@ public class HelpViewController extends AView implements IView{
 
     }
 
-
-    @Override
-    public void run() {
-
-    }
 }
