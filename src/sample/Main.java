@@ -1,11 +1,8 @@
 package sample;
 
-
-import Model.IModel;
+import Model.*;
 import Model.MyModel;
-import View.GameViewGridController;
-import View.IView;
-import View.MyViewController;
+import View.*;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.util.Objects;
 
 public class Main extends Application {
     MyViewModel viewModel;

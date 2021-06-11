@@ -3,21 +3,15 @@ package Model;
 import Client.*;
 import IO.MyDecompressorInputStream;
 import Server.*;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
-import algorithms.search.AState;
 import algorithms.search.Solution;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.*;
-import java.util.Properties;
 
 public class MyModel extends Observable implements IModel {
     private Maze maze;

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<?import View.*?>
+
+<GridPane fx:id="gridPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
+  <columnConstraints>
+<!--    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />-->
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="127.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="460.0" minHeight="10.0" prefHeight="422.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="140.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane GridPane.rowIndex="0" GridPane.columnIndex="0" maxWidth="-Infinity">
+         <children>
+             <MenuBar fx:id="menuBar" maxWidth="-Infinity" prefHeight="38.0" prefWidth="708.0" stylesheets="@MainStyle.css" GridPane.halignment="CENTER">
+                  <Menu mnemonicParsing="false" text="File">
+                      <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
+                      <MenuItem fx:id="saveMazeButton" disable="true" mnemonicParsing="false" text="Save" />
+                      <MenuItem mnemonicParsing="false" onAction="#menuLoadPressed" text="Load" />
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Options">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
+                          <RadioMenuItem mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
+                          <RadioMenuItem mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Exit">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#ExitAppMyView" text="Exit" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
+                      </items>
+                  </Menu>
+              </MenuBar>
+         </children>
+      </Pane>
+      <HBox alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="0" maxWidth="-Infinity" maxHeight="-Infinity">
+         <children>
+            <AnchorPane prefHeight="140.0" prefWidth="712.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <TextField layoutX="264.0" layoutY="7.0" prefHeight="25.0" prefWidth="52.0" />
+                  <Label layoutX="224.0" layoutY="10.0" prefHeight="18.0" prefWidth="40.0" text="Row:">
+                     <font>
+                        <Font name="Calibri Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="336.0" layoutY="10.0" prefHeight="18.0" prefWidth="60.0" text="Column:">
+                     <font>
+                        <Font name="Calibri Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="282.0" layoutY="39.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" text="Generate">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="301.0" layoutY="85.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="69.0" text="Solve!">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
+                  <TextField layoutX="396.0" layoutY="6.0" prefHeight="25.0" prefWidth="52.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Pane fx:id="PaneDisplayer" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" GridPane.columnIndex="0">
+       <MazeDisplayer fx:id="mazeDisplayer" HBox.hgrow="ALWAYS" height="-Infinity" imagePlayer="./resources/images/hash2.png" imageWall="./resources/images/tree.png" imageEnd="./resources/images/picachu.png" imageSolve="resources/images/SomeofPokemon2.png" onKeyPressed="#keyPressed" onMouseClicked="#mouseCLicked" onScroll="#zoomIn" style="-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="600" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      </Pane>
+   </children>
+</GridPane>
