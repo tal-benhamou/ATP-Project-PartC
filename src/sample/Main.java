@@ -30,13 +30,18 @@ public class Main extends Application {
         IView my = fxmlLoader.getController();
         IModel model = new MyModel();
         viewModel = new MyViewModel(model);
-        //MyViewController my = fxmlLoader.getController();
+        //MyViewController my1 = fxmlLoader.getController();
         //GameViewGridController game = fxmlLoader.getController();
         my.setViewModel(viewModel);
         //game.setViewModel(viewModel);
         primaryStage.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+        viewModel.close();
+        super.stop();
+    }
 
     public static void main(String[] args) {
         launch(args);

@@ -84,14 +84,9 @@ public class MyModel extends Observable implements IModel {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        toServer.writeObject(maze);
+                        toServer.writeObject(solvedMaze);
                         toServer.flush();
                         solution = (Solution)fromServer.readObject();
-                        ArrayList<AState> mazeSolutionSteps = solution.getSolutionPath();
-
-                        for(int i = 0; i < mazeSolutionSteps.size(); ++i) {
-                            System.out.println(String.format("%s. %s", i, ((AState)mazeSolutionSteps.get(i)).toString()));
-                        }
                     } catch (Exception var10) {
                         var10.printStackTrace();
                     }
@@ -118,51 +113,59 @@ public class MyModel extends Observable implements IModel {
         }
         int sizeRowMaze = maze.getMap().length - 1;
         int sizeColMaze = maze.getMap()[0].length - 1;
+        int[][] map = maze.getMap();
         switch (direction){
             case 1:
-                if (playerRow < sizeRowMaze && playerCol > 0){
+                if ((playerRow < sizeRowMaze && playerCol > 0) && (map[playerRow][playerCol-1] != 1 || map[playerRow+1][playerCol] != 1) && (map[playerRow+1][playerCol-1] != 1)) {
                     playerRow++;
                     playerCol--;
-                    break;
+
                 }
+                break;
             case 2:
-                if (playerRow < sizeRowMaze) {
+                if ((playerRow < sizeRowMaze) && (map[playerRow+1][playerCol] != 1)) {
                     playerRow++;
-                    break;
+
                 }
+                break;
             case 3:
-                if (playerRow < sizeRowMaze && playerCol < sizeColMaze){
+                if ((playerRow < sizeRowMaze && playerCol < sizeColMaze) && (map[playerRow][playerCol+1] != 1 || map[playerRow+1][playerCol] != 1) && (map[playerRow+1][playerCol+1] != 1)){
                     playerRow++;
                     playerCol++;
-                    break;
+
                 }
+                break;
             case 4:
-                if (playerCol > 0) {
+                if ((playerCol > 0) && (map[playerRow][playerCol-1] != 1)) {
                     playerCol--;
-                    break;
                 }
+                break;
             case 6:
-                if (playerCol < sizeColMaze) {
+                if ((playerCol < sizeColMaze)  && (map[playerRow][playerCol+1] != 1)) {
                     playerCol++;
-                    break;
+
                 }
+                break;
             case 7:
-                if (playerRow > 0 && playerCol > 0){
+                if ((playerRow > 0 && playerCol > 0)  && (map[playerRow-1][playerCol] != 1 || map[playerRow][playerCol-1] != 1) && (map[playerRow-1][playerCol-1] != 1)){
                     playerRow--;
                     playerCol--;
-                    break;
+
                 }
+                break;
             case 8:
-                if (playerRow > 0) {
+                if ((playerRow > 0)  && (map[playerRow-1][playerCol] != 1)){
                     playerRow--;
-                    break;
+
                 }
+                break;
             case 9:
-                if (playerRow > 0 && playerCol < sizeColMaze){
+                if ((playerRow > 0 && playerCol < sizeColMaze)  && (map[playerRow-1][playerCol] != 1 || map[playerRow][playerCol+1] != 1) && (map[playerRow-1][playerCol+1] != 1)){
                     playerRow--;
                     playerCol++;
-                    break;
+
                 }
+                break;
         }
         if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
             setChanged();

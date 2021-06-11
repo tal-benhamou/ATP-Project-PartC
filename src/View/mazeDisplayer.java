@@ -53,20 +53,20 @@ public class MazeDisplayer extends Canvas {
 
     private void drawPlayer(int rowIndex, int columnIndex, GraphicsContext graph) throws FileNotFoundException {
         Image player = new Image(new FileInputStream(getImagePlayer()));
-//        graph.setGlobalAlpha(0.1);
-//        graph.setFill(Color.WHITE);
-//        graph.fillRect((cellWidth*playerCol)+0.15, (cellHeight*playerRow)+0.15, cellWidth-0.2, cellHeight-0.18);
-//        graph.setGlobalAlpha(1);
+        graph.clearRect((playerCol*cellWidth)+0.1, (playerRow*cellHeight)+0.1, cellWidth-0.2,cellHeight-0.2);
+        graph.setGlobalAlpha(0.1);
+        graph.setFill(Color.WHITE);
+        graph.fillRect((cellWidth*playerCol)+0.15, (cellHeight*playerRow)+0.15, cellWidth-0.2, cellHeight-0.18);
+        graph.setGlobalAlpha(1);
         graph.drawImage(player, playerCol*cellWidth, playerRow*cellHeight, cellWidth, cellHeight);
-
-
     }
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
-        drawOld(getGraphicsContext2D());
+       // drawOld(getGraphicsContext2D());
         this.playerRow = row;
         this.playerCol = col;
-        drawOld(getGraphicsContext2D());
-        drawPlayer(row, col, getGraphicsContext2D());
+        //drawOld(getGraphicsContext2D());
+        draw();
+        //drawPlayer(row, col, getGraphicsContext2D());
     }
     private void drawOld(GraphicsContext graph) {
         double x = playerCol * cellWidth;
@@ -76,6 +76,7 @@ public class MazeDisplayer extends Canvas {
     }
 
     public void draw() throws FileNotFoundException {
+
         double hightCanvas = getHeight();
         double widthCanvas = getHeight();
         int row = maze.getMap().length;
@@ -83,6 +84,7 @@ public class MazeDisplayer extends Canvas {
         cellHeight = hightCanvas/row;
         cellWidth = widthCanvas/column;
         GraphicsContext graph = getGraphicsContext2D();
+        //clear canvas
         graph.clearRect(0, 0, widthCanvas, hightCanvas);
 
 //        graph.setGlobalAlpha(0.1);
@@ -97,7 +99,7 @@ public class MazeDisplayer extends Canvas {
                 if (maze.getMap()[i][j] == 1){
                     Image wall = new Image(new FileInputStream(getImageWall()));
                     graph.drawImage(wall, width, height, cellWidth, cellHeight);
-                    //graph.fillRect(width, height, cellHeight, cellHeight);
+                   // graph.fillRect(width, height, cellHeight, cellHeight);
                 }
                 else {
                     graph.setFill(Color.LIGHTGOLDENRODYELLOW);
@@ -114,7 +116,7 @@ public class MazeDisplayer extends Canvas {
         if (sol != null){
             drawSol(sol);
         }
-        drawPlayer(row, column, graph);
+        drawPlayer(playerRow, playerCol, graph);
     }
 
     public void movePlayer(int row, int col) throws FileNotFoundException {
@@ -124,14 +126,16 @@ public class MazeDisplayer extends Canvas {
 
     public void drawSol(Solution sol) throws FileNotFoundException {
         List<AState> lst = sol.getSolutionPath();
-        int counter = 0;
-        for (AState a:lst) {
-            if (counter == 0 && lst.size()-1 != counter){
-                Image solve = new Image(new FileInputStream(getImageSolve()));
-                GraphicsContext graph = getGraphicsContext2D();
-                graph.drawImage(solve,  ((MazeState)a).getPosition().getColumnIndex()*cellWidth, ((MazeState)a).getPosition().getRowIndex()*cellHeight, cellWidth, cellHeight);
-            }
-            counter++;
+        int curr = 0;
+        AState start = lst.get(curr);
+        while (((MazeState)start).getPosition().getRowIndex() != playerRow && ((MazeState)start).getPosition().getColumnIndex() != playerCol) {
+            curr++;
+            start = lst.get(curr);
+        }
+        for (int i = curr +1  ; i < lst.size() -1 ; i++) {
+            Image solve = new Image(new FileInputStream(getImageSolve()));
+            GraphicsContext graph = getGraphicsContext2D();
+            graph.drawImage(solve,  ((MazeState)(lst.get(i))).getPosition().getColumnIndex()*cellWidth, ((MazeState)lst.get(i)).getPosition().getRowIndex()*cellHeight, cellWidth, cellHeight);
         }
     }
 

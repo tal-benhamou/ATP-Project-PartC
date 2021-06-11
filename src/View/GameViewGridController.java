@@ -13,7 +13,10 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
@@ -30,8 +33,12 @@ public class GameViewGridController extends AView implements Observer, Initializ
     public TextField colsTextField;
     public MenuItem saveMazeButton;
     public TextField rowsTextField;
-    //public AnchorPane anchorPane;
-    public GridPane gridPane;
+    public AnchorPane anchorPane;
+    //public Pane PaneDisplayer;
+    public MenuBar menuBar;
+    public GridPane gridPain;
+    public Pane gridPaneDisplayer;
+    public HBox HBOX;
     private Solution solution;
     boolean isFinish;
     private final Timeline timeline = new Timeline();
@@ -42,11 +49,11 @@ public class GameViewGridController extends AView implements Observer, Initializ
         this.viewModel = viewModel;
         this.viewModel.addObserver(this);
         this.CurrScene = solveMazeButton.getScene();
-      //  anchorPane.minWidthProperty().bind(CurrScene.widthProperty());
-        //anchorPane.maxWidthProperty().bind(CurrScene.widthProperty());
+        gridPaneDisplayer.minWidthProperty().bind(CurrScene.widthProperty());
+        gridPaneDisplayer.maxWidthProperty().bind(CurrScene.widthProperty());
 
-        //anchorPane.maxHeightProperty().bind(CurrScene.heightProperty().subtract(vbox.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
-        //anchorPane.minHeightProperty().bind(CurrScene.heightProperty().subtract(vbox.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
+        gridPaneDisplayer.maxHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
+        gridPaneDisplayer.minHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
 
     }
 
@@ -54,6 +61,7 @@ public class GameViewGridController extends AView implements Observer, Initializ
         @Override
         public void invalidated(javafx.beans.Observable observable) {
             try {
+
                 mazeDisplayer.draw();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -95,7 +103,8 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     private void playerMoved() throws FileNotFoundException {
-       mazeDisplayer.movePlayer(viewModel.getPlayerRow(), viewModel.getPlayerCol());
+        mazeDisplayer.setPlayerPosition(viewModel.getPlayerRow(), viewModel.getPlayerCol());
+       // mazeDisplayer.movePlayer(viewModel.getPlayerRow(), viewModel.getPlayerCol());
     }
 
     private void getGoal() {
@@ -104,7 +113,7 @@ public class GameViewGridController extends AView implements Observer, Initializ
 
     private void drawSolution() throws FileNotFoundException {
         //mazeDisplayer.setSol(viewModel.getSolution());
-        mazeDisplayer.drawSol(solution);
+        mazeDisplayer.drawSol(viewModel.getSolution());
         //mazeDisplayer.drawMaze(viewModel.getMaze());
     }
 
@@ -118,8 +127,8 @@ public class GameViewGridController extends AView implements Observer, Initializ
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mazeDisplayer.widthProperty().bind(gridPane.widthProperty());
-        mazeDisplayer.heightProperty().bind(gridPane.heightProperty());
+        mazeDisplayer.widthProperty().bind(gridPaneDisplayer.widthProperty());
+        mazeDisplayer.heightProperty().bind(gridPaneDisplayer.heightProperty());
         mazeDisplayer.widthProperty().addListener(listener);
         mazeDisplayer.heightProperty().addListener(listener);
 
@@ -139,11 +148,11 @@ public class GameViewGridController extends AView implements Observer, Initializ
 //        else
         CenterCanvas();
         //playerPosition = viewModel.getLocation();
+        isFinish = false;
         solveMazeButton.setDisable(false);
         saveMazeButton.setDisable(false);
         mazeDisplayer.drawMaze(viewModel.getMaze());
         Position playerPosition = new Position(viewModel.getPlayerRow(), viewModel.getPlayerCol());
-        isFinish = false;
         mazeDisplayer.requestFocus();
         //viewModel.generateMaze(rows, cols);
 
@@ -181,11 +190,12 @@ public class GameViewGridController extends AView implements Observer, Initializ
             alert.show();
         }
         viewModel.generateMaze(rows, cols);
-        mazeDisplayer.drawMaze(viewModel.getMaze());
+        //mazeDisplayer.drawMaze(viewModel.getMaze());
     }
 
     public void solveMaze(ActionEvent actionEvent) throws FileNotFoundException {
-        mazeDisplayer.drawMaze(viewModel.getMaze());
+        viewModel.solveMaze();
+        //mazeDisplayer.drawSol(viewModel.getSolution());
     }
 
     public void fileNewPressed(ActionEvent actionEvent) {
@@ -253,6 +263,7 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     public void movePlayer(KeyEvent keyEvent) {
+
         if (isFinish == false)
             viewModel.movePlayer(keyEvent);
     }
@@ -260,13 +271,9 @@ public class GameViewGridController extends AView implements Observer, Initializ
 
 
     public void keyPressed(KeyEvent keyEvent) {
+        mazeDisplayer.requestFocus();
         if(isFinish == false)
             viewModel.movePlayer(keyEvent);
-//        catch (IllegalStateException e) {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setContentText("Game is over! Create a new game to play");
-//            alert.show();
-//        }
         keyEvent.consume();
     }
 
