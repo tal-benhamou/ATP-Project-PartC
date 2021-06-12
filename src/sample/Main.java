@@ -1,8 +1,8 @@
 package sample;
 
-import Model.*;
+import Model.IModel;
 import Model.MyModel;
-import View.*;
+import View.IView;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +13,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     MyViewModel viewModel;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("./View/GameViewGrid.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("./View/MyView.fxml"));
         Parent root = fxmlLoader.load();
@@ -36,9 +41,5 @@ public class Main extends Application {
     public void stop() throws Exception {
         viewModel.close();
         super.stop();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

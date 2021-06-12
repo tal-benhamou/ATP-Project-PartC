@@ -33,9 +33,6 @@ public class PropertiesViewController extends AView implements IView {
         }
 
         conf.setNumThreads(NumThreads.getText());
-        System.out.println(conf.getProperty("mazeSearchingAlgorithm"));
-        System.out.println(conf.getProperty("mazeGeneratingAlgorithm"));
-        System.out.println(conf.getProperty("threadPoolSize"));
         Stage stage = (Stage) LetsGoButton.getScene().getWindow();
         stage.close();
     }

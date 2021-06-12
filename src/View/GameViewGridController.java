@@ -7,19 +7,21 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -39,6 +41,9 @@ public class GameViewGridController extends AView implements Observer, Initializ
     public GridPane gridPain;
     public Pane gridPaneDisplayer;
     public HBox HBOX;
+    public VBox vboxdisplayer;
+    public GridPane gridpain1;
+    public AnchorPane PPane2;
     private Solution solution;
     boolean isFinish;
     private final Timeline timeline = new Timeline();
@@ -48,16 +53,19 @@ public class GameViewGridController extends AView implements Observer, Initializ
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.addObserver(this);
+        //this.CurrScene = (new Button()).getScene();
         this.CurrScene = solveMazeButton.getScene();
         gridPaneDisplayer.minWidthProperty().bind(CurrScene.widthProperty());
         gridPaneDisplayer.maxWidthProperty().bind(CurrScene.widthProperty());
-
-        gridPaneDisplayer.maxHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
-        gridPaneDisplayer.minHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(20));
+        gridPaneDisplayer.minHeightProperty().bind(gridpain1.heightProperty());
+        gridPaneDisplayer.maxHeightProperty().bind(gridpain1.heightProperty());
+        gridPaneDisplayer.minHeightProperty().bind(PPane2.heightProperty());
+        gridPaneDisplayer.maxHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(15));
+        gridPaneDisplayer.minHeightProperty().bind(CurrScene.heightProperty().subtract(anchorPane.heightProperty()).subtract(menuBar.heightProperty()).subtract(15));
 
     }
 
-    private final InvalidationListener listener = new InvalidationListener(){
+    private final InvalidationListener listener = new InvalidationListener() {
         @Override
         public void invalidated(javafx.beans.Observable observable) {
             try {
@@ -71,8 +79,8 @@ public class GameViewGridController extends AView implements Observer, Initializ
 
     @Override
     public void update(Observable o, Object arg) {
-        String change = (String)arg;
-        switch (change){
+        String change = (String) arg;
+        switch (change) {
             case "Maze Generated":
                 try {
                     generateMaze();
@@ -88,7 +96,11 @@ public class GameViewGridController extends AView implements Observer, Initializ
                 }
                 break;
             case "Get Goal":
-                getGoal();
+                try {
+                    getGoal();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "Player Moved":
                 try {
@@ -104,11 +116,12 @@ public class GameViewGridController extends AView implements Observer, Initializ
 
     private void playerMoved() throws FileNotFoundException {
         mazeDisplayer.setPlayerPosition(viewModel.getPlayerRow(), viewModel.getPlayerCol());
-       // mazeDisplayer.movePlayer(viewModel.getPlayerRow(), viewModel.getPlayerCol());
+        // mazeDisplayer.movePlayer(viewModel.getPlayerRow(), viewModel.getPlayerCol());
     }
 
-    private void getGoal() {
-
+    private void getGoal() throws IOException {
+        isFinish = true;
+        getFinish(new ActionEvent());
     }
 
     private void drawSolution() throws FileNotFoundException {
@@ -129,9 +142,10 @@ public class GameViewGridController extends AView implements Observer, Initializ
     public void initialize(URL location, ResourceBundle resources) {
         mazeDisplayer.widthProperty().bind(gridPaneDisplayer.widthProperty());
         mazeDisplayer.heightProperty().bind(gridPaneDisplayer.heightProperty());
+        mazeDisplayer.widthProperty().bind(vboxdisplayer.widthProperty());
+        mazeDisplayer.heightProperty().bind(vboxdisplayer.heightProperty());
         mazeDisplayer.widthProperty().addListener(listener);
         mazeDisplayer.heightProperty().addListener(listener);
-
     }
 
     public void generateMaze() throws FileNotFoundException {
@@ -199,7 +213,7 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     public void fileNewPressed(ActionEvent actionEvent) {
-        viewModel.generateMaze(10,10);
+        viewModel.generateMaze(10, 10);
     }
 
     public void mouseCLicked(MouseEvent mouseEvent) {
@@ -207,7 +221,7 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
 
-//    public void menuSavePressed(ActionEvent actionEvent) {
+    //    public void menuSavePressed(ActionEvent actionEvent) {
 //        FileChooser fileChooser = getFileChooser("Choose Path To Save The Maze");
 //        File file = fileChooser.showSaveDialog(solveMazeButton.getScene().getWindow());
 //        if (file != null)
@@ -225,28 +239,25 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
     public void zoomIn(ScrollEvent event) {
-        double zoomfactor=1;
+        double zoomfactor = 1;
         if (event.isControlDown()) {
             if (event.getDeltaY() > 0) {
                 zoomfactor = 1.4;
-            }
-            else{
+            } else {
                 zoomfactor = 0.6;
             }
-            if(mazeDisplayer.getScaleX()*zoomfactor < 0.9){
+            if (mazeDisplayer.getScaleX() * zoomfactor < 0.9) {
                 CenterCanvas();
-            }
-            else
-            {
-                double factor = (mazeDisplayer.getScaleX()*zoomfactor / mazeDisplayer.getScaleX()) - 1;
+            } else {
+                double factor = (mazeDisplayer.getScaleX() * zoomfactor / mazeDisplayer.getScaleX()) - 1;
                 double xPos = (event.getSceneX() - (mazeDisplayer.localToScene(mazeDisplayer.getBoundsInLocal()).getWidth() / 2 + mazeDisplayer.localToScene(mazeDisplayer.getBoundsInLocal()).getMinX()));
                 double yPos = (event.getSceneY() - (mazeDisplayer.localToScene(mazeDisplayer.getBoundsInLocal()).getHeight() / 2 + mazeDisplayer.localToScene(mazeDisplayer.getBoundsInLocal()).getMinY()));
                 timeline.getKeyFrames().clear();
                 timeline.getKeyFrames().addAll(
                         new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.translateXProperty(), mazeDisplayer.getTranslateX() - factor * xPos)),
                         new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.translateYProperty(), mazeDisplayer.getTranslateY() - factor * yPos)),
-                        new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.scaleXProperty(), mazeDisplayer.getScaleX()*zoomfactor)),
-                        new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.scaleYProperty(), mazeDisplayer.getScaleX()*zoomfactor))
+                        new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.scaleXProperty(), mazeDisplayer.getScaleX() * zoomfactor)),
+                        new KeyFrame(Duration.millis(100), new KeyValue(mazeDisplayer.scaleYProperty(), mazeDisplayer.getScaleX() * zoomfactor))
                 );
                 timeline.play();
                 mazeDisplayer.setScaleX(mazeDisplayer.getScaleX() * zoomfactor);
@@ -269,14 +280,25 @@ public class GameViewGridController extends AView implements Observer, Initializ
     }
 
 
-
     public void keyPressed(KeyEvent keyEvent) {
         mazeDisplayer.requestFocus();
-        if(isFinish == false)
+        if (isFinish == false)
             viewModel.movePlayer(keyEvent);
         keyEvent.consume();
     }
 
+    public void SaveFunc(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PicachuMaze", "*.pmz");
+        fileChooser.getExtensionFilters().add(extFilter);
+        //Show save file dialog
+        fileChooser.setTitle("Save Your PicachuMaze");
+        File file = fileChooser.showSaveDialog(CurrScene.getWindow());
+        if (file != null) {
+            viewModel.saveMaze(file);
+        }
+    }
 
 
 }
