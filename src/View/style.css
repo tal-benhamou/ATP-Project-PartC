@@ -9,6 +9,9 @@
     -fx-background-color: linear-gradient(from 0% 50% to 0% 100% , #dedede, #ff2929);
 }
 
+#gridPaneGame{
+    -fx-background-color: linear-gradient(from 0% 50% to 0% 100% , #b5b2b2, #f54c4c);
+}
 
 #YesButton {
     -fx-padding: 8 15 15 15;

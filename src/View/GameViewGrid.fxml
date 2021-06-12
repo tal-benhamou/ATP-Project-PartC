@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import View.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" prefHeight="745" prefWidth="691.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
+<AnchorPane fx:id="PPane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" prefHeight="745" prefWidth="691.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewGridController">
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="758.0">
         <columnConstraints>
@@ -19,7 +19,7 @@
              <MenuBar fx:id="menuBar" GridPane.columnIndex="0" GridPane.rowIndex="0" stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
                  <Menu mnemonicParsing="false" text="File">
                      <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
-                     <MenuItem fx:id="saveMazeButton" disable="true" mnemonicParsing="false" text="Save" />
+                     <MenuItem fx:id="saveMazeButton" onAction="#SaveFunc" disable="true" mnemonicParsing="false" text="Save" />
                      <MenuItem mnemonicParsing="false" onAction="#menuLoadPressed" text="Load" />
                  </Menu>
                  <Menu mnemonicParsing="false" text="Options">

@@ -78,7 +78,7 @@ public class MazeDisplayer extends Canvas {
     public void draw() throws FileNotFoundException {
 
         double hightCanvas = getHeight();
-        double widthCanvas = getHeight();
+        double widthCanvas = getWidth();
         int row = maze.getMap().length;
         int column = maze.getMap()[0].length;
         cellHeight = hightCanvas/row;
@@ -86,11 +86,6 @@ public class MazeDisplayer extends Canvas {
         GraphicsContext graph = getGraphicsContext2D();
         //clear canvas
         graph.clearRect(0, 0, widthCanvas, hightCanvas);
-
-//        graph.setGlobalAlpha(0.1);
-//        graph.setFill(Color.WHITE);
-//        graph.fillRect(0, 0, widthCanvas, hightCanvas);
-//        graph.setGlobalAlpha(1);
         double height, width;
         Image wall = new Image(new FileInputStream(getImageWall()));
         for (int i = 0; i < row; i++) {

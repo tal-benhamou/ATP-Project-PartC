@@ -49,14 +49,14 @@ public abstract class AView implements IView {
         Media media = new Media(Paths.get(s).toUri().toString());
         picaSound = new MediaPlayer(media);
         picaSound.setVolume(0.8);
-        if (musicPlay)
+        if (soundPlay && musicPlay)
             mediaPlayer.pause();
         if (soundPlay)
             picaSound.play();
         new Thread(() -> {
             try {
                 Thread.sleep(3000);
-                if (musicPlay)
+                if (musicPlay && !mediaPlayer.isAutoPlay())
                     mediaPlayer.play();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -80,13 +80,16 @@ public abstract class AView implements IView {
         }
     }
     public void muteSound(ActionEvent actionEvent) {
+        String s = "resources/sounds/pikachuSounds_Trim.mp3";
+        Media media = new Media(Paths.get(s).toUri().toString());
+        picaSound = new MediaPlayer(media);
+        picaSound.setVolume(0.8);
         if (soundPlay) {
             picaSound.stop();
             soundPlay = false;
         } else {
             soundPlay = true;
         }
-
     }
 
     public void muteMusic(ActionEvent actionEvent) {
@@ -148,7 +151,8 @@ public abstract class AView implements IView {
     }
 
     protected void getFinish(ActionEvent actionEvent) throws IOException {
-        muteMusic(actionEvent);
+        if (musicPlay)
+            muteMusic(actionEvent);
         Stage videostage = null;
         videostage = new Stage();
         videostage.setTitle("Congratulation");

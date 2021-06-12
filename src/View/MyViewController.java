@@ -37,7 +37,7 @@ public class MyViewController extends AView implements Observer, Initializable {
 
     protected void openNewScene(Scene scene) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameViewGrid.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
             Parent tableViewParent = fxmlLoader.load();
 
 //            tableViewParent = fxmlLoader.load();

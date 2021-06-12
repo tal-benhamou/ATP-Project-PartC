@@ -1,8 +1,20 @@
 
+#generateMazeButton{
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: linear-gradient(#c0c0c0, #fc5f5f);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 
+}
+#solveMazeButton{
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: linear-gradient(#c0c0c0, #fc5f5f);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
 Button{
     -fx-font-weight: bold;
-    -fx-text-fill: black;
+    -fx-text-fill: BLACK;
     -fx-background-color: linear-gradient(#c0c0c0, #fc5f5f);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
