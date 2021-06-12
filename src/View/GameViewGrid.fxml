@@ -58,7 +58,7 @@
                 </AnchorPane>
             </HBox>
              <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" GridPane.halignment="CENTER">
-                <Pane fx:id="gridPaneDisplayer" prefHeight="200.0" prefWidth="200.0">
+                <Pane fx:id="gridPaneDisplayer" prefHeight="350.0" prefWidth="600.0">
                         <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" width="-Infinity" imagePlayer="./resources/images/hash2.png" imageWall="./resources/images/tree.png" imageEnd="./resources/images/picachu.png" imageSolve="resources/images/SomeofPokemon2.png" onKeyPressed="#keyPressed" onMouseClicked="#mouseCLicked" onScroll="#zoomIn" style="-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );"   />
                 </Pane>
              </VBox>
