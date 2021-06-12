@@ -6,6 +6,7 @@ import algorithms.search.Solution;
 import javafx.scene.input.KeyEvent;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -80,7 +81,7 @@ public class MyViewModel extends Observable implements Observer {
     public void saveMaze(File file){
         model.saveMaze(file);
     }
-    public void loadMaze(File file){
+    public void loadMaze(File file) throws FileNotFoundException {
         model.loadMaze(file);
     }
     public String[] getProperties(){

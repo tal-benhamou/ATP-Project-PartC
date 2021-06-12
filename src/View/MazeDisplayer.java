@@ -92,12 +92,12 @@ public class MazeDisplayer extends Canvas {
 //        graph.fillRect(0, 0, widthCanvas, hightCanvas);
 //        graph.setGlobalAlpha(1);
         double height, width;
+        Image wall = new Image(new FileInputStream(getImageWall()));
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 width = j*cellWidth;
                 height = i*cellHeight;
                 if (maze.getMap()[i][j] == 1){
-                    Image wall = new Image(new FileInputStream(getImageWall()));
                     graph.drawImage(wall, width, height, cellWidth, cellHeight);
                    // graph.fillRect(width, height, cellHeight, cellHeight);
                 }
@@ -128,12 +128,12 @@ public class MazeDisplayer extends Canvas {
         List<AState> lst = sol.getSolutionPath();
         int curr = 0;
         AState start = lst.get(curr);
+        Image solve = new Image(new FileInputStream(getImageSolve()));
         while (((MazeState)start).getPosition().getRowIndex() != playerRow && ((MazeState)start).getPosition().getColumnIndex() != playerCol) {
             curr++;
             start = lst.get(curr);
         }
         for (int i = curr +1  ; i < lst.size() -1 ; i++) {
-            Image solve = new Image(new FileInputStream(getImageSolve()));
             GraphicsContext graph = getGraphicsContext2D();
             graph.drawImage(solve,  ((MazeState)(lst.get(i))).getPosition().getColumnIndex()*cellWidth, ((MazeState)lst.get(i)).getPosition().getRowIndex()*cellHeight, cellWidth, cellHeight);
         }

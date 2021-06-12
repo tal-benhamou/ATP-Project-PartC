@@ -1,16 +1,10 @@
 package View;
-import Server.*;
 import Server.Configurations;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
 
 public class PropertiesViewController extends AView implements IView {
     public MenuButton SolveAlg;
@@ -39,9 +33,6 @@ public class PropertiesViewController extends AView implements IView {
         }
 
         conf.setNumThreads(NumThreads.getText());
-        System.out.println(conf.getProperty("mazeSearchingAlgorithm"));
-        System.out.println(conf.getProperty("mazeGeneratingAlgorithm"));
-        System.out.println(conf.getProperty("threadPoolSize"));
         Stage stage = (Stage) LetsGoButton.getScene().getWindow();
         stage.close();
     }

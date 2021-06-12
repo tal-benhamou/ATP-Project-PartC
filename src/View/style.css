@@ -5,6 +5,9 @@
 #PPane{
    -fx-background-color : linear-gradient(#ff0000, #ffffff);
 }
+#PPane2{
+    -fx-background-color: linear-gradient(from 0% 50% to 0% 100% , #dedede, #ff2929);
+}
 
 
 #YesButton {

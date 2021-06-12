@@ -3,21 +3,15 @@ package Model;
 import Client.*;
 import IO.MyDecompressorInputStream;
 import Server.*;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
-import algorithms.search.AState;
 import algorithms.search.Solution;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.*;
-import java.util.Properties;
 
 public class MyModel extends Observable implements IModel {
     private Maze maze;
@@ -188,12 +182,39 @@ public class MyModel extends Observable implements IModel {
 
     @Override
     public void saveMaze(File file) {
-
+        FileOutputStream outputStream = null;
+        ObjectOutput writemaze = null;
+        try{
+            outputStream = new FileOutputStream(file);
+            writemaze = new ObjectOutputStream(outputStream);
+            writemaze.writeObject(maze);
+            outputStream.close();
+            writemaze.close();
+            setChanged();
+            notifyObservers("Maze Saved");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void loadMaze(File file) {
-
+        FileInputStream inputstream = null;
+        ObjectInputStream readobj = null;
+        try {
+            inputstream = new FileInputStream(file);
+            readobj = new ObjectInputStream(inputstream);
+            maze = (Maze) readobj.readObject();
+            inputstream.close();
+            readobj.close();
+            setChanged();
+            notifyObservers("Maze Generated");
+     }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

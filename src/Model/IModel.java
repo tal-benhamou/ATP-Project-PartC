@@ -4,6 +4,7 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Observer;
 
 public interface IModel  {
@@ -15,7 +16,7 @@ public interface IModel  {
     int getPlayerRow();
     int getPlayerCol();
     void saveMaze(File file);
-    void loadMaze(File file);
+    void loadMaze(File file) throws FileNotFoundException;
     String[] getProperties();
     void close();
     void assignObserver(Observer o);

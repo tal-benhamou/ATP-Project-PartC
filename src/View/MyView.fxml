@@ -7,7 +7,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@style.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <top>
-        <MenuBar stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
+        <MenuBar fx:id="menubar1" stylesheets="@MainStyle.css" BorderPane.alignment="CENTER">
             <Menu mnemonicParsing="false" text="File">
                 <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New"/>
                 <MenuItem disable="true" mnemonicParsing="false" text="Save"/>
@@ -42,12 +42,12 @@
          <children>
              <ImageView fitHeight="200.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
                  <image>
-                     <Image url="images/titlePng1.png"/>
+                     <Image url="./images/titlePng1.png"/>
                  </image>
              </ImageView>
              <ImageView fitHeight="400.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
                  <image>
-                     <Image url="images/congradulation.png"/>
+                     <Image url="./images/congradulation.png"/>
                  </image>
              </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
