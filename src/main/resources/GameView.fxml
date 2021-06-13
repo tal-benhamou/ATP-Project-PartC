@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import View.MazeDisplayer?>
+<GridPane fx:id="gridPaneGame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="995.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameViewController" >
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="250.0" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+    <children>
+      <Pane fx:id="PaneMenuBar" prefHeight="10" GridPane.rowIndex="0" >
+         <children>
+              <MenuBar fx:id="menuBar" prefHeight="10.0" prefWidth="995.0" stylesheets="@MainStyle.css" GridPane.halignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" >
+                  <Menu mnemonicParsing="false" text="File">
+                      <MenuItem mnemonicParsing="false" onAction="#fileNewPressed" text="New" />
+                      <MenuItem fx:id="saveMazeButton" disable="true" mnemonicParsing="false" onAction="#SaveFunc" text="Save" />
+                      <MenuItem mnemonicParsing="false" onAction="#menuLoadPressed" text="Load" />
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Options">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties" />
+                          <RadioMenuItem fx:id="soundGameView" mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds" />
+                          <RadioMenuItem fx:id="musicGameView" mnemonicParsing="false" onAction="#muteMusic" text="Mute Music" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Exit">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#ExitAppMyView" text="Exit" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About" />
+                      </items>
+                  </Menu>
+              </MenuBar>
+         </children>
+      </Pane >
+      <Pane fx:id="gridPaneDisplayer" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.columnSpan="1" GridPane.rowSpan="1" >
+            <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" imageEnd="resources/View/resources/picachu.png" imagePlayer="resources/View/resources/hash2.png"
+                           imageSolve="resources/View/resources/SomeofPokemon2.png" imageWall="resources/View/resources/tree.png" onKeyPressed="#keyPressed"
+                           onMouseClicked="#mouseClick" onScroll="#zoomIn" onMousePressed="#mousePreesed" onMouseDragged="#mouseDragged" onMouseReleased="#mouseDraggedReleased" style="-fx-effect:
+                            dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="-Infinity" />
+        </Pane>
+      <VBox fx:id="VBox" alignment="CENTER" spacing="10.0" GridPane.rowIndex="2">
+         <children>
+            <VBox alignment="CENTER" prefHeight="27.0" prefWidth="940.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="940.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="45.0" text="Rows:">
+                                 <font>
+                                    <Font name="Calibri Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="rowsTextField" prefHeight="21.0" prefWidth="66.0">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font></TextField>
+                              <Pane prefHeight="100.0" prefWidth="139.0">
+                                 <children>
+                                    <Label layoutX="8.0" layoutY="2.0" prefHeight="22.0" prefWidth="60.0" text="Columns:">
+                                       <font>
+                                          <Font name="Calibri Italic" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="colsTextField" layoutX="70.0" prefHeight="21.0" prefWidth="66.0">
+                                       <font>
+                                           <Font name="System Italic" size="14.0" />
+                                       </font></TextField>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Button fx:id="generateMazeButton" blendMode="MULTIPLY" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generateNewMaze" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="104.0" text="Generate" stylesheets="@MainStyle.css">
+               <font>
+                  <Font name="Calibri Italic" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="solveMazeButton" blendMode="MULTIPLY" contentDisplay="CENTER" mnemonicParsing="false" onAction="#solveMaze" prefHeight="15.0" prefWidth="66.0" text="Solve" stylesheets="@MainStyle.css">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </Button>
+         </children>
+      </VBox>
+
+    </children>
+</GridPane>

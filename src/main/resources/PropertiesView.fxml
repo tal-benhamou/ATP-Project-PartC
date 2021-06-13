@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="955.0" style="-fx-background-image: url('View/resources/NiceCover.jpg');" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesViewController">
+   <top>
+        <AnchorPane prefHeight="387.0" prefWidth="785.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="LetsGoButton" alignment="CENTER" contentDisplay="CENTER" layoutX="306.0" layoutY="349.0" mnemonicParsing="false" onAction="#GoToGameView" prefHeight="30.0" prefWidth="152.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Confirm &amp; Let`s Go!">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Label layoutX="65.0" layoutY="240.0" prefHeight="25.0" prefWidth="207.0" text="Choose Algorithm To Solve:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
+            <Label layoutX="65.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" text="Choose Algorithm To Generate:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
+            <TextField fx:id="NumThreads" blendMode="SRC_ATOP" layoutX="335.0" layoutY="78.0" prefHeight="25.0" prefWidth="59.0"/>
+            <Label layoutX="65.0" layoutY="75.0" prefHeight="32.0" prefWidth="261.0" text="How Many Threads Do You Want?" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect></Label>
+            <MenuButton fx:id="GenerateAlg" layoutX="316.0" layoutY="159.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="201.0">
+              <items>
+                <MenuItem onAction="#mygen" mnemonicParsing="false" text="My Generator" />
+                <MenuItem onAction="#simplegen" mnemonicParsing="false" text="Simple Generator" />
+                  <MenuItem onAction="#emptygen" mnemonicParsing="false" text="Empty Generator" />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="SolveAlg" layoutX="316.0" layoutY="237.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="201.0">
+              <items>
+                <MenuItem onAction="#bestsearch" mnemonicParsing="false" text="Best First Search" />
+                <MenuItem onAction="#breadthsearch" mnemonicParsing="false" text="Breadth First Search " />
+                  <MenuItem onAction="#dephtsearch" mnemonicParsing="false" text="Depth First Search" />
+              </items>
+            </MenuButton>
+            </children>
+        </AnchorPane>
+   </top>
+</BorderPane>
