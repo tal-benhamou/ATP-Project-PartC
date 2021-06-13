@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,7 +29,6 @@ public class MyViewController extends AView implements Observer, Initializable {
     public BorderPane Pane;
     public Menu menufile;
     public Menu optionmenu;
-
 
     public void StartGame(ActionEvent actionEvent) {
         Scene GameScene = ((Node) actionEvent.getSource()).getScene();

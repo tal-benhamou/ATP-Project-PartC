@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -32,6 +33,8 @@ public abstract class AView implements IView {
     static boolean musicPlayBol = true;
     public Button picaButton;
     static boolean soundPlayBol = true;
+    public RadioMenuItem soundGameView;
+    public RadioMenuItem musicGameView;
 
 
     public void PicaAction(ActionEvent actionEvent) throws InterruptedException {
