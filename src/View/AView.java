@@ -17,7 +17,6 @@ import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,28 +27,31 @@ public abstract class AView implements IView {
 
     protected MyViewModel viewModel;
     protected Scene CurrScene;
-    public static MediaPlayer picaSound;
-    public static MediaPlayer mediaPlayer;
-    static boolean musicPlay = true;
+    public static MediaPlayer soundPlay;
+    public static MediaPlayer musicPlay;
+    static boolean musicPlayBol = true;
     public Button picaButton;
-    static boolean soundPlay = true;
+    static boolean soundPlayBol = true;
 
 
     public void PicaAction(ActionEvent actionEvent) throws InterruptedException {
 
         String s = "resources/sounds/pikachuSounds_Trim.mp3";
         Media media = new Media(Paths.get(s).toUri().toString());
-        picaSound = new MediaPlayer(media);
-        picaSound.setVolume(0.8);
-        if (soundPlay && musicPlay)
-            mediaPlayer.pause();
-        if (soundPlay)
-            picaSound.play();
+        soundPlay = new MediaPlayer(media);
+        soundPlay.setVolume(0.8);
+        if (soundPlayBol && musicPlayBol) {
+            musicPlay.pause();
+            soundPlay.play();
+        }
+        else if (soundPlayBol && !musicPlayBol){
+            soundPlay.play();
+        }
         new Thread(() -> {
             try {
                 Thread.sleep(3000);
-                if (musicPlay)
-                    mediaPlayer.play();
+                if (musicPlayBol)
+                    musicPlay.play();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -61,10 +63,8 @@ public abstract class AView implements IView {
 
     public void menuLoadPressed(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
-        //Set extension filter for text files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PicachuMaze", "*.pmz");
         fileChooser.getExtensionFilters().add(extFilter);
-        //Show save file dialog
         fileChooser.setTitle("Choose Your Picachu File");
         File file = fileChooser.showOpenDialog(CurrScene.getWindow());
         if (file != null) {
@@ -74,29 +74,29 @@ public abstract class AView implements IView {
     public void muteSound(ActionEvent actionEvent) {
         String s = "resources/sounds/pikachuSounds_Trim.mp3";
         Media media = new Media(Paths.get(s).toUri().toString());
-        picaSound = new MediaPlayer(media);
-        picaSound.setVolume(0.8);
-        if (soundPlay) {
-            picaSound.stop();
-            soundPlay = false;
+        soundPlay = new MediaPlayer(media);
+        soundPlay.setVolume(0.8);
+        if (soundPlayBol) {
+            soundPlay.stop();
+            soundPlayBol = false;
         } else {
-            soundPlay = true;
+            soundPlayBol = true;
         }
     }
 
     public void muteMusic(ActionEvent actionEvent) {
-        if (musicPlay) {
-            mediaPlayer.stop();
-            musicPlay = false;
+        if (musicPlayBol) {
+            musicPlay.stop();
+            musicPlayBol = false;
         } else {
-            musicPlay = true;
-            mediaPlayer.play();
+            musicPlayBol = true;
+            musicPlay.play();
         }
     }
 
     public void ExitApp(ActionEvent actionEvent) {
-        if (mediaPlayer.isAutoPlay()) {
-            mediaPlayer.pause();
+        if (musicPlay.isAutoPlay()) {
+            musicPlay.pause();
         }
         Stage stage = (Stage) CurrScene.getWindow();
         stage.close();
@@ -143,8 +143,8 @@ public abstract class AView implements IView {
     }
 
     protected void getFinish(ActionEvent actionEvent) throws IOException {
-        if (musicPlay)
-            muteMusic(actionEvent);
+        if (musicPlayBol)
+            musicPlay.stop();
         Stage videostage = null;
         videostage = new Stage();
         videostage.setTitle("Congratulation");
@@ -198,7 +198,8 @@ public abstract class AView implements IView {
             stage.close();
             try {
                 mediaVideo.stop();
-                muteMusic(actionEvent);
+                if (musicPlayBol)
+                    musicPlay.play();
                 NewStage("FinishView.fxml", "Congratulation");
             } catch (IOException ioException) {
                 ioException.printStackTrace();

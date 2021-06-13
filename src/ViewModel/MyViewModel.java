@@ -95,4 +95,25 @@ public class MyViewModel extends Observable implements Observer {
         setChanged();
         notifyObservers(arg);
     }
+
+    public void isValidDragg(int i, int j) {
+        int rowMove = i - getPlayerRow();
+        int columnMove = j - getPlayerCol();
+        if (rowMove == 1 && columnMove == -1)
+            model.updatePlayerLocation(1);
+        else if (rowMove == 1 && columnMove == 0)
+            model.updatePlayerLocation(2);
+        else if (rowMove == 1 && columnMove == 1)
+            model.updatePlayerLocation(3);
+        else if (rowMove == 0 && columnMove == -1)
+            model.updatePlayerLocation(4);
+        else if (rowMove == 0 && columnMove == 1)
+            model.updatePlayerLocation(6);
+        else if (rowMove == -1 && columnMove == -1)
+            model.updatePlayerLocation(7);
+        else if (rowMove == -1 && columnMove == 0)
+            model.updatePlayerLocation(8);
+        else if (rowMove == -1 && columnMove == 1)
+            model.updatePlayerLocation(9);
+    }
 }

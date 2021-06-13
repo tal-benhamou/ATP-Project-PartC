@@ -1,7 +1,6 @@
 package View;
 
 import ViewModel.*;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -11,12 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -32,14 +27,8 @@ public class MyViewController extends AView implements Observer, Initializable {
     public Button startButton;
     public MenuBar menubar1;
     public BorderPane Pane;
-    public Menu menufile;
-    public Menu optionmenu;
-    public VBox vBox;
-    public ImageView image1;
-    public ImageView image2;
     private final ObjectProperty<javafx.scene.image.ImageView> imageProperty = new SimpleObjectProperty<>();
-    public HBox Hbox;
-    public Button exitButton;
+
 
 
 
@@ -52,9 +41,6 @@ public class MyViewController extends AView implements Observer, Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
             Parent tableViewParent = fxmlLoader.load();
-
-//            tableViewParent = fxmlLoader.load();
-
             Stage window = (Stage) scene.getWindow();
             Scene curScene = startButton.getScene();
             Scene tableViewScene = new Scene(tableViewParent, curScene.getWidth(), curScene.getHeight());
@@ -90,14 +76,10 @@ public class MyViewController extends AView implements Observer, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String s = "resources/sounds/palletsound.mp3";
         Media media = new Media(Paths.get(s).toUri().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(200);
-        mediaPlayer.setVolume(0.05);
-        mediaPlayer.setAutoPlay(true);
-//        image1.fitHeightProperty().bind(Pane.heightProperty());
-//        image1.fitWidthProperty().bind(Pane.widthProperty());
-//        image2.fitHeightProperty().bind(Pane.heightProperty());
-//        image2.fitWidthProperty().bind(Pane.widthProperty());
+        musicPlay = new MediaPlayer(media);
+        musicPlay.setCycleCount(200);
+        musicPlay.setVolume(0.05);
+        musicPlay.setAutoPlay(true);
 
     }
 
@@ -106,8 +88,5 @@ public class MyViewController extends AView implements Observer, Initializable {
         super.ExitApp(actionEvent);
     }
 
-    public void menuClicked(ActionEvent mouseEvent) {
-
-    }
 
 }

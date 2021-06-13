@@ -61,13 +61,11 @@ public class MazeDisplayer extends Canvas {
         graph.drawImage(player, playerCol*cellWidth, playerRow*cellHeight, cellWidth, cellHeight);
     }
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
-       // drawOld(getGraphicsContext2D());
         this.playerRow = row;
         this.playerCol = col;
-        //drawOld(getGraphicsContext2D());
         draw();
-        //drawPlayer(row, col, getGraphicsContext2D());
     }
+
     private void drawOld(GraphicsContext graph) {
         double x = playerCol * cellWidth;
         double y = playerRow * cellHeight;
@@ -81,8 +79,10 @@ public class MazeDisplayer extends Canvas {
         double widthCanvas = getWidth();
         int row = maze.getMap().length;
         int column = maze.getMap()[0].length;
-        cellHeight = hightCanvas/row;
-        cellWidth = widthCanvas/column;
+        //cellHeight = hightCanvas/row;
+        setCellHeight(hightCanvas/row);
+        //cellWidth = widthCanvas/column;
+        setCellWidth(widthCanvas/column);
         GraphicsContext graph = getGraphicsContext2D();
         //clear canvas
         graph.clearRect(0, 0, widthCanvas, hightCanvas);
@@ -114,6 +114,14 @@ public class MazeDisplayer extends Canvas {
         drawPlayer(playerRow, playerCol, graph);
     }
 
+    public int getPlayerRow() {
+        return playerRow;
+    }
+
+    public int getPlayerCol() {
+        return playerCol;
+    }
+
     public void movePlayer(int row, int col) throws FileNotFoundException {
         if (maze != null)
             drawPlayer(row, col, getGraphicsContext2D());
@@ -134,4 +142,19 @@ public class MazeDisplayer extends Canvas {
         }
     }
 
+    public double getCellHeight() {
+        return cellHeight;
+    }
+
+    public double getCellWidth() {
+        return cellWidth;
+    }
+
+    public void setCellHeight(double cellHeight) {
+        this.cellHeight = cellHeight;
+    }
+
+    public void setCellWidth(double cellWidth) {
+        this.cellWidth = cellWidth;
+    }
 }

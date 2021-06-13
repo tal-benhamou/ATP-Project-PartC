@@ -61,7 +61,10 @@
          </children>
       </Pane >
       <Pane fx:id="gridPaneDisplayer" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.columnSpan="1" GridPane.rowSpan="1" >
-            <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" imageEnd="./resources/images/picachu.png" imagePlayer="./resources/images/hash2.png" imageSolve="resources/images/SomeofPokemon2.png" imageWall="./resources/images/tree.png" onKeyPressed="#keyPressed" onMouseClicked="#mouseCLicked" onScroll="#zoomIn" style="-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="-Infinity" />
+            <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" imageEnd="./resources/images/picachu.png" imagePlayer="./resources/images/hash2.png"
+                           imageSolve="resources/images/SomeofPokemon2.png" imageWall="./resources/images/tree.png" onKeyPressed="#keyPressed"
+                           onMouseClicked="#mouseClick" onScroll="#zoomIn" onMousePressed="#mousePreesed" onMouseDragged="#mouseDragged" onMouseReleased="#mouseDraggedReleased" style="-fx-effect:
+                            dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="-Infinity" />
         </Pane>
       <VBox fx:id="VBox" alignment="CENTER" spacing="10.0" GridPane.rowIndex="2">
          <children>
@@ -82,14 +85,14 @@
                                  </font></TextField>
                               <Pane prefHeight="100.0" prefWidth="139.0">
                                  <children>
-                                    <Label layoutX="8.0" layoutY="2.0" prefHeight="22.0" prefWidth="62.0" text="Columns:">
+                                    <Label layoutX="8.0" layoutY="2.0" prefHeight="22.0" prefWidth="60.0" text="Columns:">
                                        <font>
                                           <Font name="Calibri Italic" size="16.0" />
                                        </font>
                                     </Label>
                                     <TextField fx:id="colsTextField" layoutX="70.0" prefHeight="21.0" prefWidth="66.0">
                                        <font>
-                                          <Font size="14.0" />
+                                           <Font name="System Italic" size="14.0" />
                                        </font></TextField>
                                  </children>
                               </Pane>

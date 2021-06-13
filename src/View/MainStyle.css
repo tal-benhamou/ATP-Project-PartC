@@ -1,14 +1,14 @@
 
 #generateMazeButton{
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
     -fx-background-color: linear-gradient(#c0c0c0, #fc5f5f);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 
 }
 #solveMazeButton{
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
     -fx-background-color: linear-gradient(#c0c0c0, #fc5f5f);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
@@ -62,20 +62,20 @@ Button{
     -fx-text-fill: white;
 }
 .context-menu {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";*/
     -fx-background-color:white ;
     -fx-border-width: 0.2px;
     -fx-border-color: black;
     -fx-background-insets: 0.0, 1.0, 2.0;
     -fx-background-radius: 0.0 6.0 6.0 6.0, 0.0 5.0 5.0 5.0, 0.0 4.0 4.0 4.0;
-    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; 
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
     -fx-opacity: 0.9;
 }
 
-.scroll-pane > .viewport {
-   -fx-background-color: transparent;
-}
+/*.scroll-pane > .viewport {*/
+/*   -fx-background-color: transparent;*/
+/*}*/
 
-.scroll-pane {
-   -fx-background-color: transparent;
-}
+/*.scroll-pane {*/
+/*   -fx-background-color: transparent;*/
+/*}*/
