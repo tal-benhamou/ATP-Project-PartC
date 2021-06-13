@@ -23,7 +23,7 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="250.0" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="558.0" minHeight="9.0" prefHeight="492.0" vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
       <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
   </rowConstraints>
     <children>
@@ -60,12 +60,12 @@
               </MenuBar>
          </children>
       </Pane >
-      <Pane fx:id="gridPaneDisplayer" prefHeight="900.0" prefWidth="600.0" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.columnSpan="1" GridPane.rowSpan="1" >
+      <Pane fx:id="gridPaneDisplayer" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.columnSpan="1" GridPane.rowSpan="1" >
             <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" imageEnd="./resources/images/picachu.png" imagePlayer="./resources/images/hash2.png" imageSolve="resources/images/SomeofPokemon2.png" imageWall="./resources/images/tree.png" onKeyPressed="#keyPressed" onMouseClicked="#mouseCLicked" onScroll="#zoomIn" style="-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="-Infinity" />
         </Pane>
-      <VBox alignment="CENTER" spacing="10.0" GridPane.rowIndex="2">
+      <VBox fx:id="VBox" alignment="CENTER" spacing="10.0" GridPane.rowIndex="2">
          <children>
-            <VBox fx:id="VBox" alignment="CENTER" prefHeight="27.0" prefWidth="940.0">
+            <VBox alignment="CENTER" prefHeight="27.0" prefWidth="940.0">
                <children>
                   <VBox>
                      <children>

@@ -51,10 +51,6 @@ public class GameViewController extends AView implements Observer, Initializable
         this.viewModel.addObserver(this);
         //this.CurrScene = (new Button()).getScene();
         this.CurrScene = solveMazeButton.getScene();
-        //gridPaneDisplayer.maxHeightProperty().bind(CurrScene.heightProperty().subtract(menuBar.heightProperty()).subtract(20));
-        //gridPaneDisplayer.minHeightProperty().bind(CurrScene.heightProperty().subtract(menuBar.heightProperty()).subtract(20));
-        //gridPaneDisplayer.maxHeightProperty().bind(CurrScene.widthProperty().subtract(PaneMenuBar.heightProperty()).subtract(10));
-        //gridPaneDisplayer.minHeightProperty().bind(CurrScene.widthProperty().subtract(PaneMenuBar.heightProperty()).subtract(10));
     }
 
     private final InvalidationListener listener = new InvalidationListener() {
@@ -134,9 +130,8 @@ public class GameViewController extends AView implements Observer, Initializable
     public void initialize(URL location, ResourceBundle resources) {
         mazeDisplayer.widthProperty().bind(gridPaneDisplayer.widthProperty());
         mazeDisplayer.heightProperty().bind(gridPaneDisplayer.heightProperty());
-//        mazeDisplayer.widthProperty().bind(gridPaneGame.widthProperty());
-//        mazeDisplayer.heightProperty().bind(gridPaneGame.heightProperty());
         menuBar.prefWidthProperty().bind(gridPaneGame.widthProperty());
+        gridPaneGame.prefHeightProperty().bind(menuBar.heightProperty());
         mazeDisplayer.widthProperty().addListener(listener);
         mazeDisplayer.heightProperty().addListener(listener);
     }
