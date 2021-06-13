@@ -37,26 +37,26 @@
             </Menu>
         </MenuBar>
     </top>
-    <center>
-        <VBox alignment="BOTTOM_CENTER" prefHeight="400" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="200.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="./images/titlePng1.png"/>
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="450.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="./images/congradulation.png"/>
-                    </image>
-                </ImageView>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                    <children>
-                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#StartGame" prefHeight="40.0" prefWidth="100.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Start" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" onAction="#ExitAppMyView" prefWidth="100.0" text="Exit" style="-fx-opacity: 1;" stylesheets="@MainStyle.css"  />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </center>
+   <center>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="400" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+             <ImageView fitHeight="200.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
+                 <image>
+                     <Image url="./images/titlePng1.png"/>
+                 </image>
+             </ImageView>
+             <ImageView fitHeight="400.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
+                 <image>
+                     <Image url="./images/congradulation.png"/>
+                 </image>
+             </ImageView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#StartGame" prefHeight="40.0" prefWidth="100.0" style="-fx-opacity: 1;" stylesheets="@MainStyle.css" text="Start" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" onAction="#ExitAppMyView" prefWidth="100.0" text="Exit" style="-fx-opacity: 1;" stylesheets="@MainStyle.css"  />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

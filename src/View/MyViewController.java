@@ -1,8 +1,6 @@
 package View;
 
 import ViewModel.*;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -27,9 +26,8 @@ public class MyViewController extends AView implements Observer, Initializable {
     public Button startButton;
     public MenuBar menubar1;
     public BorderPane Pane;
-    private final ObjectProperty<javafx.scene.image.ImageView> imageProperty = new SimpleObjectProperty<>();
-
-
+    public Menu menufile;
+    public Menu optionmenu;
 
 
     public void StartGame(ActionEvent actionEvent) {
@@ -41,6 +39,9 @@ public class MyViewController extends AView implements Observer, Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
             Parent tableViewParent = fxmlLoader.load();
+
+//            tableViewParent = fxmlLoader.load();
+
             Stage window = (Stage) scene.getWindow();
             Scene curScene = startButton.getScene();
             Scene tableViewScene = new Scene(tableViewParent, curScene.getWidth(), curScene.getHeight());
@@ -80,7 +81,6 @@ public class MyViewController extends AView implements Observer, Initializable {
         musicPlay.setCycleCount(200);
         musicPlay.setVolume(0.05);
         musicPlay.setAutoPlay(true);
-
     }
 
     public void ExitAppMyView(ActionEvent actionEvent) {
@@ -88,5 +88,8 @@ public class MyViewController extends AView implements Observer, Initializable {
         super.ExitApp(actionEvent);
     }
 
+    public void menuClicked(ActionEvent mouseEvent) {
+
+    }
 
 }
