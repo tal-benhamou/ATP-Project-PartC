@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,7 +29,6 @@ public class MyViewController extends AView implements Observer, Initializable {
     public MenuBar menubar1;
     public BorderPane Pane;
     private final ObjectProperty<javafx.scene.image.ImageView> imageProperty = new SimpleObjectProperty<>();
-
 
 
 

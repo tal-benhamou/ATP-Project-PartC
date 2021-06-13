@@ -40,6 +40,7 @@ public class GameViewController extends AView implements Observer, Initializable
     private boolean clickPlayer;
     boolean isFinish;
     private final Timeline timeLine = new Timeline();
+    private boolean DisableSolveButton = true;
 
 
     @Override
@@ -120,6 +121,10 @@ public class GameViewController extends AView implements Observer, Initializable
         gridPaneGame.prefHeightProperty().bind(menuBar.heightProperty());
         mazeDisplayer.widthProperty().addListener(listener);
         mazeDisplayer.heightProperty().addListener(listener);
+        if (!musicPlayBol)
+            musicGameView.setSelected(true);
+        if (!soundPlayBol)
+            soundGameView.setSelected(true);
     }
 
     public void generateMaze() throws FileNotFoundException {
@@ -138,17 +143,38 @@ public class GameViewController extends AView implements Observer, Initializable
     }
 
     public void generateNewMaze(ActionEvent actionEvent) throws FileNotFoundException {
-        int rows = Integer.parseInt(rowsTextField.getText());
-        int cols = Integer.parseInt(colsTextField.getText());
+        int rows = 0,cols = 0;
+        if (rowsTextField.getText().toString().equals("")) {
+            rows = 10;
+        }
+        else {
+            try {
+                rows = Integer.parseInt(rowsTextField.getText().toString());
+            } catch (NumberFormatException e) {
+                rows = 10;
+            }
+        }
+        if (colsTextField.getText().toString().equals(""))
+            cols = 10;
+        else {
+            try {
+                cols = Integer.parseInt(colsTextField.getText());
+            } catch (NumberFormatException e) {
+                cols = 10;
+            }
+        }
         if (rows < 2 || cols < 2) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please write a valid dimensions. (Minimum Size - 2X2)");
             alert.show();
+            return;
         }
         viewModel.generateMaze(rows, cols);
+        DisableSolveButton = false;
     }
 
     public void solveMaze(ActionEvent actionEvent) throws FileNotFoundException {
-        viewModel.solveMaze();
+        if (!DisableSolveButton)
+            viewModel.solveMaze();
     }
 
     public void fileNewPressed(ActionEvent actionEvent) {

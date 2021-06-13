@@ -16,8 +16,8 @@
             <Menu mnemonicParsing="false" text="Options">
                 <items>
                     <MenuItem mnemonicParsing="false" onAction="#getProperties" text="Properties"/>
-                    <RadioMenuItem mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds"/>
-                    <RadioMenuItem mnemonicParsing="false" onAction="#muteMusic" text="Mute Music"/>
+                    <RadioMenuItem fx:id="soundMyView" mnemonicParsing="false" onAction="#muteSound" text="Mute Sounds"/>
+                    <RadioMenuItem fx:id="musicMyView" mnemonicParsing="false" onAction="#muteMusic" text="Mute Music"/>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Exit">
