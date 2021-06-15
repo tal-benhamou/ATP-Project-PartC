@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ATP-Project-PartC">
+    <output-path>$PROJECT_DIR$/out/artifacts/ATP_Project_PartC</output-path>
+    <root id="root">
+      <element id="archive" name="ATP_Project_PartC.jar">
+        <element id="module-output" name="ATP-Project-PartC" />
+      </element>
+    </root>
+  </artifact>
+</component>

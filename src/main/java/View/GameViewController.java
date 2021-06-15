@@ -55,8 +55,9 @@ public class GameViewController extends AView implements Observer, Initializable
         @Override
         public void invalidated(javafx.beans.Observable observable) {
             try {
-               if (viewModel != null && viewModel.getMaze() != null)
-                    mazeDisplayer.draw();
+               if (viewModel != null && viewModel.getMaze() != null) {
+                   mazeDisplayer.draw();
+               }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -111,6 +112,7 @@ public class GameViewController extends AView implements Observer, Initializable
     }
 
     private void drawSolution() throws FileNotFoundException {
+        mazeDisplayer.setSolution(viewModel.getSolution());
         mazeDisplayer.drawSol(viewModel.getSolution());
     }
 
@@ -198,9 +200,9 @@ public class GameViewController extends AView implements Observer, Initializable
         double zoom = 1;
         if (event.isControlDown()) {
             if (event.getDeltaY() > 0) {
-                zoom = 1.4;
+                zoom = 1.6;
             } else {
-                zoom = 0.6;
+                zoom = 0.5;
             }
             if (mazeDisplayer.getScaleX() * zoom < 0.9) {
                 centerCanvas();

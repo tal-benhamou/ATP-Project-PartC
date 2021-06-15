@@ -26,7 +26,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("The Pokemon Game");
-        primaryStage.getIcons().add(new Image("View/resources/picachu.png"));
+        primaryStage.getIcons().add(new Image("./View/resources/picachu.png"));
         primaryStage.setScene(new Scene(root, 755, 800));
         primaryStage.show();
         IView my = fxmlLoader.getController();

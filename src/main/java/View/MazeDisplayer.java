@@ -52,17 +52,14 @@ public class MazeDisplayer extends Canvas {
 
     private void drawPlayer(int rowIndex, int columnIndex, GraphicsContext graph) throws FileNotFoundException {
         Image player = new Image(new FileInputStream(getImagePlayer()));
-        graph.clearRect((playerCol*cellWidth)+0.1, (playerRow*cellHeight)+0.1, cellWidth-0.2,cellHeight-0.2);
-        graph.setGlobalAlpha(0.1);
-        graph.setFill(Color.WHITE);
-        graph.fillRect((cellWidth*playerCol)+0.15, (cellHeight*playerRow)+0.15, cellWidth-0.2, cellHeight-0.18);
-        graph.setGlobalAlpha(1);
+        graph.setFill(Color.LIGHTGOLDENRODYELLOW);
+        graph.fillRect(playerCol*cellWidth, playerRow*cellHeight, cellWidth, cellHeight);
+        this.playerRow = rowIndex;
+        this.playerCol = columnIndex;
         graph.drawImage(player, playerCol*cellWidth, playerRow*cellHeight, cellWidth, cellHeight);
     }
     public void setPlayerPosition(int row, int col) throws FileNotFoundException {
-        this.playerRow = row;
-        this.playerCol = col;
-        draw();
+        drawPlayer(row, col, getGraphicsContext2D());
     }
 
 
@@ -142,5 +139,9 @@ public class MazeDisplayer extends Canvas {
 
     public void setCellWidth(double cellWidth) {
         this.cellWidth = cellWidth;
+    }
+
+    public void setSolution(Solution solution) {
+        this.sol = solution;
     }
 }

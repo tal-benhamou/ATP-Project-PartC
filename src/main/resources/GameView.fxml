@@ -62,7 +62,7 @@
       </Pane >
       <Pane fx:id="gridPaneDisplayer" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.columnSpan="1" GridPane.rowSpan="1" >
             <MazeDisplayer fx:id="mazeDisplayer" height="-Infinity" imageEnd="resources/View/resources/picachu.png" imagePlayer="resources/View/resources/hash2.png"
-                           imageSolve="resources/View/resources/SomeofPokemon2.png" imageWall="resources/View/resources/tree.png" onKeyPressed="#keyPressed"
+                           imageSolve="resources/View/resources/1592457187472.png" imageWall="resources/View/resources/tree.png" onKeyPressed="#keyPressed"
                            onMouseClicked="#mouseClick" onScroll="#zoomIn" onMousePressed="#mousePreesed" onMouseDragged="#mouseDragged" onMouseReleased="#mouseDraggedReleased" style="-fx-effect:
                             dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" width="-Infinity" />
         </Pane>
