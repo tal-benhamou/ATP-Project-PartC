@@ -151,6 +151,7 @@ public abstract class AView implements IView {
         Stage videostage = null;
         videostage = new Stage();
         videostage.setTitle("Congratulation");
+        //videostage.getIcons().add(new Image(("View/resources/picachu.png")));
         FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("VideoFinishView.fxml"));
         // Pane p = new Pane( 433, 703);
         Parent p = Loader.load();
@@ -158,7 +159,6 @@ public abstract class AView implements IView {
         IView view = Loader.getController();
         view.setViewModel(viewModel);
         videostage.setScene(s);
-        //videostage = NewStage("VideoFinishView.fxml","Congratulation");
         videostage.setMinHeight(423);
         videostage.setMaxHeight(423);
         videostage.setMinWidth(700.0);
@@ -203,7 +203,8 @@ public abstract class AView implements IView {
                 mediaVideo.stop();
                 if (musicPlayBol)
                     musicPlay.play();
-                NewStage("FinishView.fxml", "Congratulation");
+                 Stage stage1 = NewStage("FinishView.fxml", "Congratulation");
+                stage1.getIcons().add(new Image(("View/resources/congradulation.png")));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

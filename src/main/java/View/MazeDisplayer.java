@@ -48,7 +48,6 @@ public class MazeDisplayer extends Canvas {
         this.playerRow = maze.getStartPosition().getRowIndex();
         this.playerCol = maze.getStartPosition().getColumnIndex();
         draw();
-        //drawPlayer(maze.getGoalPosition().getRowIndex(), maze.getGoalPosition().getColumnIndex(), getGraphicsContext2D());
     }
 
     private void drawPlayer(int rowIndex, int columnIndex, GraphicsContext graph) throws FileNotFoundException {
@@ -66,12 +65,6 @@ public class MazeDisplayer extends Canvas {
         draw();
     }
 
-    private void drawOld(GraphicsContext graph) {
-        double x = playerCol * cellWidth;
-        double y = playerRow * cellHeight;
-        graph.setFill(Color.WHITE);
-        graph.fillRect(x, y, cellWidth, cellHeight);
-    }
 
     public void draw() throws FileNotFoundException {
 
@@ -79,9 +72,7 @@ public class MazeDisplayer extends Canvas {
         double widthCanvas = getWidth();
         int row = maze.getMap().length;
         int column = maze.getMap()[0].length;
-        //cellHeight = hightCanvas/row;
         setCellHeight(hightCanvas/row);
-        //cellWidth = widthCanvas/column;
         setCellWidth(widthCanvas/column);
         GraphicsContext graph = getGraphicsContext2D();
         //clear canvas
@@ -94,7 +85,6 @@ public class MazeDisplayer extends Canvas {
                 height = i*cellHeight;
                 if (maze.getMap()[i][j] == 1){
                     graph.drawImage(wall, width, height, cellWidth, cellHeight);
-                   // graph.fillRect(width, height, cellHeight, cellHeight);
                 }
                 else {
                     graph.setFill(Color.LIGHTGOLDENRODYELLOW);
@@ -122,10 +112,6 @@ public class MazeDisplayer extends Canvas {
         return playerCol;
     }
 
-    public void movePlayer(int row, int col) throws FileNotFoundException {
-        if (maze != null)
-            drawPlayer(row, col, getGraphicsContext2D());
-    }
 
     public void drawSol(Solution sol) throws FileNotFoundException {
         List<AState> lst = sol.getSolutionPath();

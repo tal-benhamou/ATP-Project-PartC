@@ -26,8 +26,6 @@ public class MyViewController extends AView implements Observer, Initializable {
     public Button startButton;
     public MenuBar menubar1;
     public BorderPane Pane;
-    public Menu menufile;
-    public Menu optionmenu;
 
     public void StartGame(ActionEvent actionEvent) {
         Scene GameScene = ((Node) actionEvent.getSource()).getScene();
@@ -38,9 +36,6 @@ public class MyViewController extends AView implements Observer, Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
             Parent tableViewParent = fxmlLoader.load();
-
-//            tableViewParent = fxmlLoader.load();
-
             Stage window = (Stage) scene.getWindow();
             Scene curScene = startButton.getScene();
             Scene tableViewScene = new Scene(tableViewParent, curScene.getWidth(), curScene.getHeight());
@@ -87,8 +82,5 @@ public class MyViewController extends AView implements Observer, Initializable {
         super.ExitApp(actionEvent);
     }
 
-    public void menuClicked(ActionEvent mouseEvent) {
-
-    }
 
 }

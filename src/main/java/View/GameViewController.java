@@ -41,6 +41,7 @@ public class GameViewController extends AView implements Observer, Initializable
     boolean isFinish;
     private final Timeline timeLine = new Timeline();
     private boolean DisableSolveButton = true;
+    private boolean isGoalPosion = false;
 
 
     @Override
@@ -83,6 +84,7 @@ public class GameViewController extends AView implements Observer, Initializable
             case "Get Goal":
                 try {
                     getGoal();
+                    isGoalPosion = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -251,7 +253,7 @@ public class GameViewController extends AView implements Observer, Initializable
     }
 
     public void mouseDragged(MouseEvent mouseEvent) {
-        if (clickPlayer){
+        if (clickPlayer && !isGoalPosion){
             double cellHeight = mazeDisplayer.getCellHeight();
             double cellWidth = mazeDisplayer.getCellWidth();
             double x = mouseEvent.getSceneX()-gridPaneDisplayer.localToScene(gridPaneDisplayer.getBoundsInLocal()).getMinX();
