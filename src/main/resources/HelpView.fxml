@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="703.0" style="-fx-background-image: url('View/resources/help2.jpg'); -fx-background-size: cover; -fx-background-repeat: no-repeat;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AboutViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="703.0" style="-fx-background-image: url('help2.jpg'); -fx-background-size: cover; -fx-background-repeat: no-repeat;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AboutViewController">
 <bottom>
    <AnchorPane prefHeight="296.0" prefWidth="737.0" BorderPane.alignment="CENTER">
       <children>

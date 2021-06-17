@@ -42,12 +42,12 @@
          <children>
              <ImageView fitHeight="200.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
                  <image>
-                     <Image  url="View/resources/titlePng1.png"/>
+                     <Image url="titlePng1.png"/>
                  </image>
              </ImageView>
              <ImageView fitHeight="400.0" fitWidth="400" pickOnBounds="true" preserveRatio="true">
                  <image>
-                     <Image url="View/resources/congradulation.png"/>
+                     <Image url="congradulation.png"/>
                  </image>
              </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

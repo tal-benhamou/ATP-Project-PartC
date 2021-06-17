@@ -1,7 +1,6 @@
 package View;
 
 import ViewModel.MyViewModel;
-import algorithms.mazeGenerators.Position;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -15,7 +14,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -114,6 +112,7 @@ public class GameViewController extends AView implements Observer, Initializable
     private void drawSolution() throws FileNotFoundException {
         mazeDisplayer.setSolution(viewModel.getSolution());
         mazeDisplayer.drawSol(viewModel.getSolution());
+        mazeDisplayer.requestFocus();
     }
 
 
@@ -256,6 +255,7 @@ public class GameViewController extends AView implements Observer, Initializable
 
     public void mouseDragged(MouseEvent mouseEvent) {
         if (clickPlayer && !isGoalPosion){
+            mazeDisplayer.requestFocus();
             double cellHeight = mazeDisplayer.getCellHeight();
             double cellWidth = mazeDisplayer.getCellWidth();
             double x = mouseEvent.getSceneX()-gridPaneDisplayer.localToScene(gridPaneDisplayer.getBoundsInLocal()).getMinX();

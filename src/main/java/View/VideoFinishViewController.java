@@ -7,19 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class VideoFinishViewController extends AView implements IView{
-
-    public Button closeVideo;
-
+public class VideoFinishViewController extends AView implements IView {
     @Override
     public void setViewModel(MyViewModel viewModel) {
-
-    }
-
-    public void CloseVideo(ActionEvent actionEvent) throws IOException {
-        CurrScene = closeVideo.getScene();
-        Stage stage = (Stage) CurrScene.getWindow();
-        stage.close();
-        NewStage("FinishView.fxml", "Congratulation");
     }
 }

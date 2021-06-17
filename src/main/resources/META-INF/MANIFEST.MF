@@ -1,3 +1,9 @@
 Manifest-Version: 1.0
 Main-Class: sample.Main
+Class-Path: ATP-Project-PartB3.jar log4j-core-2.14.1.jar log4j-api-2.14.
+ 1.jar src.zip javafx-swt.jar javafx.web.jar javafx.base.jar javafx.fxml
+ .jar javafx.media.jar javafx.swing.jar javafx.controls.jar javafx.graph
+ ics.jar src.zip javafx-swt.jar javafx.web.jar javafx.base.jar javafx.fx
+ ml.jar javafx.media.jar javafx.swing.jar javafx.controls.jar javafx.gra
+ phics.jar
 

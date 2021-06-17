@@ -71,11 +71,3 @@ Button{
     -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
     -fx-opacity: 0.9;
 }
-
-/*.scroll-pane > .viewport {*/
-/*   -fx-background-color: transparent;*/
-/*}*/
-
-/*.scroll-pane {*/
-/*   -fx-background-color: transparent;*/
-/*}*/

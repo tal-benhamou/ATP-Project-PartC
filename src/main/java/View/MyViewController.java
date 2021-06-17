@@ -8,13 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -69,18 +67,17 @@ public class MyViewController extends AView implements Observer, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String s = "resources/View/resources/PokemonCenterMusic.mp3";
+        String s = "./src/main/resources/PokemonCenterMusic.mp3";
         Media media = new Media(Paths.get(s).toUri().toString());
         musicPlay = new MediaPlayer(media);
         musicPlay.setCycleCount(200);
         musicPlay.setVolume(0.17);
         musicPlay.setAutoPlay(true);
+
     }
 
     public void ExitAppMyView(ActionEvent actionEvent) {
         CurrScene = startButton.getScene();
         super.ExitApp(actionEvent);
     }
-
-
 }

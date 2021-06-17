@@ -6,9 +6,6 @@ import Server.*;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,7 +19,6 @@ public class MyModel extends Observable implements IModel {
     private int playerCol;
     private Server serverGenerator;
     private Server serverSolver;
-   // private static final Logger LOGGER = LogManager.getLogger();
 
     public MyModel() {
         serverGenerator = new Server(5400,1000, new ServerStrategyGenerateMaze());
@@ -44,7 +40,7 @@ public class MyModel extends Observable implements IModel {
                         int[] mazeDimensions = new int[]{row, col};
                         toServer.writeObject(mazeDimensions);
                         toServer.flush();
-                        byte[] compressedMaze = (byte[])((byte[])fromServer.readObject());
+                        byte[] compressedMaze = (byte[])(fromServer.readObject());
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         byte[] decompressedMaze = new byte[row*col+7];
                         is.read(decompressedMaze);

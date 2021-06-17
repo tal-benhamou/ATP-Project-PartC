@@ -17,12 +17,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
+import java.io.*;
+import java.net.URISyntaxException;
 
 public abstract class AView implements IView {
 
@@ -36,11 +32,14 @@ public abstract class AView implements IView {
     public RadioMenuItem soundGameView;
     public RadioMenuItem musicGameView;
 
+    protected InputStream getImageResourceAsStream(String imagePath){
+        return getClass().getClassLoader().getResourceAsStream(imagePath);
+    }
 
-    public void PicaAction(ActionEvent actionEvent) throws InterruptedException {
+    public void PicaAction(ActionEvent actionEvent) throws URISyntaxException {
 
-        String s = "resources/View/resources/pikachuSounds_Trim.mp3";
-        Media media = new Media(Paths.get(s).toUri().toString());
+        String s = "pikachuSounds_Trim.mp3";
+        Media media = new Media(getClass().getClassLoader().getResource(s).toURI().toString());
         soundPlay = new MediaPlayer(media);
         soundPlay.setVolume(0.6);
         if (soundPlayBol && musicPlayBol) {
@@ -74,9 +73,10 @@ public abstract class AView implements IView {
             viewModel.loadMaze(file);
         }
     }
-    public void muteSound(ActionEvent actionEvent) {
-        String s = "resources/View/resources/pikachuSounds_Trim.mp3";
-        Media media = new Media(Paths.get(s).toUri().toString());
+    public void muteSound(ActionEvent actionEvent) throws URISyntaxException {
+        String s = "pikachuSounds_Trim.mp3";
+        Media media = new Media(getClass().getClassLoader().getResource(s).toURI().toString());
+        //Media media = new Media(Paths.get(s).toUri().toString());
         soundPlay = new MediaPlayer(media);
         soundPlay.setVolume(0.8);
         if (soundPlayBol) {
@@ -86,6 +86,7 @@ public abstract class AView implements IView {
             soundPlayBol = true;
         }
     }
+
 
     public void muteMusic(ActionEvent actionEvent) {
         if (musicPlayBol) {
@@ -111,7 +112,7 @@ public abstract class AView implements IView {
         stage.setMaxHeight(450);
         stage.setMinWidth(703);
         stage.setMaxWidth(703);
-        stage.getIcons().add(new Image(("View/resources/picachu.png")));
+        stage.getIcons().add(new Image(getImageResourceAsStream("picachu.png")));
     }
 
     public void getHelp(ActionEvent actionEvent) throws IOException {
@@ -120,7 +121,7 @@ public abstract class AView implements IView {
         stage.setMaxHeight(436);
         stage.setMinWidth(703);
         stage.setMaxWidth(703);
-        stage.getIcons().add(new Image(("View/resources/picachu.png")));
+        stage.getIcons().add(new Image(getImageResourceAsStream("picachu.png")));
     }
 
     public void getProperties(ActionEvent actionEvent) throws IOException {
@@ -129,7 +130,7 @@ public abstract class AView implements IView {
         stage.setMaxHeight(500);
         stage.setMinWidth(955);
         stage.setMaxWidth(955);
-        stage.getIcons().add(new Image(("View/resources/picachu.png")));
+        stage.getIcons().add(new Image(getImageResourceAsStream("picachu.png")));
     }
 
     protected Stage NewStage(String pathFXML, String text) throws IOException {
@@ -151,9 +152,7 @@ public abstract class AView implements IView {
         Stage videostage = null;
         videostage = new Stage();
         videostage.setTitle("Congratulation");
-        //videostage.getIcons().add(new Image(("View/resources/picachu.png")));
         FXMLLoader Loader = new FXMLLoader(getClass().getClassLoader().getResource("VideoFinishView.fxml"));
-        // Pane p = new Pane( 433, 703);
         Parent p = Loader.load();
         Scene s = new Scene(p);
         IView view = Loader.getController();
@@ -163,14 +162,12 @@ public abstract class AView implements IView {
         videostage.setMaxHeight(423);
         videostage.setMinWidth(700.0);
         videostage.setMaxWidth(700.0);
-        videostage.getIcons().add(new Image("View/resources/congradulation.png"));
+        videostage.getIcons().add(new Image(getImageResourceAsStream("congradulation.png")));
 
-
-        File mediaFile = new File("resources/View/resources/videoFinish.mp4");
         Media media = null;
         try {
-            media = new Media(mediaFile.toURI().toURL().toString());
-        } catch (MalformedURLException e) {
+            media = new Media(getClass().getClassLoader().getResource("videoFinish.mp4").toURI().toString());
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
@@ -204,7 +201,7 @@ public abstract class AView implements IView {
                 if (musicPlayBol)
                     musicPlay.play();
                  Stage stage1 = NewStage("FinishView.fxml", "Congratulation");
-                stage1.getIcons().add(new Image(("View/resources/congradulation.png")));
+                stage1.getIcons().add(new Image(getImageResourceAsStream("congradulation.png")));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

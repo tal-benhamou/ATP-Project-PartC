@@ -4,7 +4,6 @@ import Model.*;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyEvent;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Observable;
